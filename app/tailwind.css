@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Regular */
+  @font-face {
+    font-family: "Sohne";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./fonts/sohne/soehne-buch.woff2) format("woff2");
+    font-feature-settings: "ss01" 1;
+  }
+  /* Semi-bold */
+  @font-face {
+    font-family: "Sohne";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(./fonts/sohne/soehne-halbfett.woff2) format("woff2");
+    font-feature-settings: "ss01" 1;
+  }
+
+  :root {
+    --background: #00171f;
+    /* --background: #FCFEFF ***white background */
+    --primary: #00a7e1;
+    --secondary: #48e5c2;
+    --error: #f04248;
+  }
+}

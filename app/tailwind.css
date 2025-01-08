@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light */
+  @font-face {
+    font-family: "Sohne";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(./fonts/sohne/test-soehne-leicht.woff2) format("woff2");
+    font-feature-settings: "ss01" 1;
+  }
+
   /* Regular */
   @font-face {
     font-family: "Sohne";
@@ -12,6 +22,17 @@
     src: url(./fonts/sohne/soehne-buch.woff2) format("woff2");
     font-feature-settings: "ss01" 1;
   }
+
+  /* Medium */
+  @font-face {
+    font-family: "Sohne";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(./fonts/sohne/test-soehne-kraftig.woff2) format("woff2");
+    font-feature-settings: "ss01" 1;
+  }
+
   /* Semi-bold */
   @font-face {
     font-family: "Sohne";
@@ -19,6 +40,26 @@
     font-weight: 600;
     font-display: swap;
     src: url(./fonts/sohne/soehne-halbfett.woff2) format("woff2");
+    font-feature-settings: "ss01" 1;
+  }
+
+  /* Bold */
+  @font-face {
+    font-family: "Sohne";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(./fonts/sohne/test-soehne-dreiviertelfett.woff2) format("woff2");
+    font-feature-settings: "ss01" 1;
+  }
+
+  /* Black */
+  @font-face {
+    font-family: "Sohne";
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url(./fonts/sohne/test-soehne-fett.woff2) format("woff2");
     font-feature-settings: "ss01" 1;
   }
 

@@ -11,7 +11,7 @@ export default {
         error: "var(--error)",
       },
       fontFamily: {
-        sohne: ['"Sohne"', "sans-serif"], // Default fallback to sans-serif
+        sohne: [["Sohne", "sans-serif"], { fontFeatureSettings: "ss01" }],
       },
     },
   },

@@ -59,7 +59,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-background">
+      <body className="bg-backdrop h-full">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

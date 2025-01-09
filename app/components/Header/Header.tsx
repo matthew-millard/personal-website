@@ -41,7 +41,7 @@ export default function Header() {
             </NavLink>
           ))}
         </div>
-        <div className="hidden gap-x-2 lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden gap-x-3 lg:flex lg:flex-1 lg:justify-end">
           <ThemeSwitch />
           <RSSFeed />
         </div>
@@ -79,7 +79,7 @@ export default function Header() {
                   </NavLink>
                 ))}
               </div>
-              <div className="py-6">
+              <div className="flex gap-x-3 py-6">
                 <ThemeSwitch />
                 <RSSFeed />
               </div>

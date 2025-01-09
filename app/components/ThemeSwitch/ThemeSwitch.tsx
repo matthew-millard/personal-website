@@ -24,7 +24,7 @@ export default function ThemeSwitch() {
         type="submit"
         name="intent"
         value={updateThemeActionIntent}
-        className="flex items-center text-white"
+        className="text-icon-muted flex items-center"
       >
         {mode === "light" ? (
           <>

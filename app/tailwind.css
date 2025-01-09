@@ -97,6 +97,10 @@
     --border-color: var(--zinc-500);
     --border-color-muted: var(--zinc-400);
     --border-color-subtle: var(--zinc-300);
+
+    /* React tooltip overrides */
+    --rt-color-white: var(--zinc-50);
+    --rt-color-dark: var(--zinc-950);
   }
 
   .dark {
@@ -121,5 +125,9 @@
     --border-color: var(--zinc-500);
     --border-color-muted: var(--zinc-700);
     --border-color-subtle: var(--zinc-800);
+
+    /* React tooltip overrides */
+    --rt-color-white: var(--zinc-950);
+    --rt-color-dark: var(--zinc-50);
   }
 }

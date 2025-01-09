@@ -6,6 +6,8 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
+        surface: "var(--surface)",
+        border: "var(--border)",
         primary: "var(--primary)",
         secondary: "var(--secondary)",
         error: "var(--error)",

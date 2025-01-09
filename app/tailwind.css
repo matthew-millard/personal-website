@@ -66,8 +66,14 @@
   :root {
     --background: #00171f;
     /* --background: #FCFEFF ***white background */
+    --border: #005c7a;
+    --surface: #005c7a;
     --primary: #00a7e1;
     --secondary: #48e5c2;
     --error: #f04248;
+  }
+
+  .light {
+    --background: #fcfeff;
   }
 }

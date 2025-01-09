@@ -1,3 +1,5 @@
-import Button from "./button/Button";
+import Header from "./Header";
+import Logo from "./Logo";
+import ThemeSwitch from "./ThemeSwitch";
 
-export { Button };
+export { Header, Logo, ThemeSwitch };

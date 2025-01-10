@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Header, Socials } from "~/components";
+import { FeaturedPosts, Header, Socials } from "~/components";
 
 export const meta: MetaFunction = () => [
   { title: "Matt Millard" },
@@ -16,7 +16,7 @@ export default function Index() {
       <Header />
       <section className="md:border-edge-subtle md:bg-backdrop-strong -md mt-12 flex flex-col-reverse items-center justify-between gap-8 overflow-hidden md:flex-row md:rounded-md md:shadow-md">
         {/* Left Section: Text Content */}
-        <div className="flex flex-col justify-center lg:pl-10">
+        <div className="flex flex-col justify-center md:pl-10">
           <div>
             <p className="text-color-subtle text-lg">Hey, I&apos;m</p>
             <h1 className="text-color ml-3 mt-2 text-4xl font-bold">
@@ -41,6 +41,13 @@ export default function Index() {
           />
         </div>
       </section>
+
+      <main className="col-start-2 pt-24">
+        <h2 className="text-color-muted text-xl">Featured Posts</h2>
+        <div className="border-edge-muted mt-4 border-t pt-10">
+          <FeaturedPosts />
+        </div>
+      </main>
     </div>
   );
 }

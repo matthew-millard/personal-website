@@ -41,6 +41,21 @@ export default {
           muted: "var(--border-color-muted)",
           subtle: "var(--border-color-subtle)",
         },
+        tag: {
+          DEFAULT: "var(--tag-color)",
+          algodata: {
+            DEFAULT: "var(--tag-color-algodata)",
+            hover: "var(--tag-color-algodata-hover)",
+          },
+          webdev: {
+            DEFAULT: "var(--tag-color-webdev)",
+            hover: "var(--tag-color-webdev-hover)",
+          },
+          proglang: {
+            DEFAULT: "var(--tag-color-proglang)",
+            hover: "var(--tag-color-proglang-hover)",
+          },
+        },
 
         // primary:
         // primary-hover:

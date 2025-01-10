@@ -52,10 +52,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function App() {
   const theme = useTheme();
   return (
-    <html lang="en" className={`${theme} h-full`}>
+    <html lang="en" className={`${theme} h-full font-sohne`}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="author" content="Matt Millard" />
         <Meta />
         <Links />
       </head>

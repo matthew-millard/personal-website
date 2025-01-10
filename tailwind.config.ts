@@ -8,6 +8,7 @@ export default {
         backdrop: {
           DEFAULT: "var(--backdrop-color)",
           muted: "var(--backdrop-color-muted)",
+          strong: "var(--backdrop-color-strong)",
         },
         panel: {
           DEFAULT: "var(--panel-color)",
@@ -18,10 +19,17 @@ export default {
           muted: "var(--text-color-muted)",
           subtle: "var(--text-color-subtle)",
         },
+        link: {
+          DEFAULT: "var(--link-color)",
+          muted: "var(--link-color-muted)",
+          hover: "var(--link-color-hover)",
+          active: "var(--link-color-active)",
+        },
         icon: {
           DEFAULT: "var(--icon-color)",
           muted: "var(--icon-color-muted)",
           subtle: "var(--icon-color-subtle)",
+          hover: "var(--icon-color-hover)",
         },
         line: {
           DEFAULT: "var(--divide-color)",

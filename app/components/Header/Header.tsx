@@ -10,12 +10,12 @@ const navigation = [
 ];
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <header className="mx-auto max-w-4xl">
+    <header>
       <nav
         aria-label="Global"
-        className="border-b-edge-subtle mx-6 flex items-center border-b py-4 lg:mx-auto"
+        className="border-b-edge-subtle flex items-center border-b py-4 lg:mx-auto"
       >
         <div className="flex flex-1 lg:mr-24 lg:flex-none">
           <Logo />
@@ -35,7 +35,7 @@ export default function Header() {
             <NavLink
               key={item.name}
               to={item.href}
-              className="text-color font-sohne text-sm"
+              className="text-link hover:text-link-hover text-sm"
             >
               {item.name}
             </NavLink>

@@ -1,4 +1,5 @@
 import { DateTime, FeaturedPosts, CategoryTag } from "./Blog";
+import Footer from "./Footer";
 import Header from "./Header";
 import Logo from "./Logo";
 import RSSFeed from "./RSSFeed";
@@ -16,4 +17,5 @@ export {
   FeaturedPosts,
   CategoryTag,
   DateTime,
+  Footer,
 };

@@ -78,6 +78,7 @@
 
     --backdrop-color: var(--zinc-100);
     --backdrop-color-muted: var(--zinc-200);
+    --backdrop-color-strong: var(--zinc-50);
 
     --panel-color: var(--zinc-100);
     --panel-color-hover: var(--zinc-200);
@@ -86,9 +87,15 @@
     --text-color-muted: var(--zinc-800);
     --text-color-subtle: var(--zinc-500);
 
+    --link-color: var(--zinc-950);
+    --link-color-muted: var(--zinc-800);
+    --link-color-hover: var(--zinc-800);
+    --link-color-active: var(--zinc-500);
+
     --icon-color: var(--zinc-800);
     --icon-color-muted: var(--zinc-600);
     --icon-color-subtle: var(--zinc-500);
+    --icon-color-hover: var(--zinc-500);
 
     --divide-color: var(--zinc-500);
     --divide-color-muted: var(--zinc-400);
@@ -106,6 +113,7 @@
   .dark {
     --backdrop-color: var(--zinc-950);
     --backdrop-color-muted: var(--zinc-800);
+    --backdrop-color-strong: #060607;
 
     --panel-color: var(--zinc-950);
     --panel-color-hover: var(--zinc-900);
@@ -113,6 +121,11 @@
     --text-color: var(--zinc-100);
     --text-color-muted: var(--zinc-300);
     --text-color-subtle: var(--zinc-400);
+
+    --link-color: var(--zinc-100);
+    --link-color-muted: var(--zinc-300);
+    --link-color-hover: var(--zinc-300);
+    --link-color-active: var(--zinc-500);
 
     --icon-color: var(--zinc-100);
     --icon-color-muted: var(--zinc-300);

@@ -18,9 +18,8 @@ const socials = [
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
         fill="currentColor"
+        className="bi bi-linkedin"
         viewBox="0 0 16 16"
         {...props}
       >
@@ -32,7 +31,7 @@ const socials = [
     name: "X",
     href: "https://x.com/_MattMillard",
     icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg fill="currentColor" {...props}>
+      <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
         <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
       </svg>
     ),
@@ -41,20 +40,19 @@ const socials = [
     name: "Discord",
     href: "https://discord.com/users/mattmillard",
     icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 127.14 96.36"
-        fill="currentColor"
-        {...props}
-      >
+      <svg viewBox="0 0 127.14 96.36" fill="currentColor" {...props}>
         <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"></path>
       </svg>
     ),
   },
 ];
 
-export default function Socials() {
+interface SocialsProps {
+  width: 16 | 20 | 24;
+  height: 16 | 20 | 24;
+}
+
+export default function Socials({ width, height }: SocialsProps) {
   return (
     <div className="flex gap-x-6">
       {socials.map((item) => (
@@ -66,7 +64,7 @@ export default function Socials() {
           rel="noreferrer"
         >
           <span className="sr-only">{item.name}</span>
-          <item.icon aria-hidden="true" className="size-6" />
+          <item.icon aria-hidden="true" width={width} height={height} />
         </a>
       ))}
     </div>

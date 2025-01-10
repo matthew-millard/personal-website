@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { FeaturedPosts, Header, Socials } from "~/components";
+import { FeaturedPosts, Footer, Header, Socials } from "~/components";
 
 export const meta: MetaFunction = () => [
   { title: "Matt Millard" },
@@ -27,7 +27,7 @@ export default function Index() {
               projects. Welcome to my portfolio and blog! 👨‍💻
             </p>
             <div className="mt-8">
-              <Socials />
+              <Socials width={24} height={24} />
             </div>
           </div>
         </div>
@@ -48,6 +48,8 @@ export default function Index() {
           <FeaturedPosts />
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

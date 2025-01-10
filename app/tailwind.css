@@ -108,6 +108,15 @@
     /* React tooltip overrides */
     --rt-color-white: var(--zinc-50);
     --rt-color-dark: var(--zinc-950);
+
+    /* Blog category tags */
+    --tag-color: var(--zinc-50);
+    --tag-color-algodata: #f97316;
+    --tag-color-algodata-hover: #fb923c;
+    --tag-color-proglang: #3b82f6;
+    --tag-color-proglang-hover: #60a5fa;
+    --tag-color-webdev: #d946ef;
+    --tag-color-webdev-hover: #e879f9;
   }
 
   .dark {

@@ -43,8 +43,8 @@ export default function Index() {
       </section>
 
       <main className="col-start-2 pt-24">
-        <h2 className="text-color-muted text-xl">Featured Posts</h2>
-        <div className="border-edge-muted mt-4 border-t pt-10">
+        <h2 className="text-color text-xl">Featured Posts</h2>
+        <div className="border-edge mt-4 border-t pt-10">
           <FeaturedPosts />
         </div>
       </main>

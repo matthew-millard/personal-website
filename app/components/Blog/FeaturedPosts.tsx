@@ -101,7 +101,7 @@ export default function FeaturedPosts() {
       {posts.map((post) => (
         <article
           key={post.id}
-          className="flex max-w-xl flex-col items-start justify-between pb-10"
+          className="border-edge-subtle mb-10 flex flex-col items-start justify-between border-b pb-10"
         >
           <div className="flex items-center gap-x-4 text-xs">
             <DateTime dateTime={post.datetime} date={post.date} />
@@ -111,13 +111,13 @@ export default function FeaturedPosts() {
             />
           </div>
           <div className="group relative">
-            <h3 className="text-color group-hover:text-color-subtle mt-3 text-lg/6 font-semibold">
+            <h3 className="text-color group-hover:text-color-muted mt-3 text-lg/6 font-semibold">
               <a href={post.href}>
                 <span className="absolute inset-0" />
                 {post.title}
               </a>
             </h3>
-            <p className="text-color-muted mt-5 line-clamp-3 text-sm/6">
+            <p className="text-color-muted mt-5 line-clamp-3 max-w-xl text-sm/6">
               {post.description}
             </p>
           </div>

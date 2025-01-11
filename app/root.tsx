@@ -13,10 +13,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { updateThemeActionIntent } from "~/components/ThemeSwitch";
 import stylesheet from "~/tailwind.css";
 import { getThemeFromCookie, updateTheme } from "./.server/theme";
+import { GenericErrorBoundary } from "./components";
 import { type Theme } from "./components/ThemeSwitch";
-import { updateThemeActionIntent } from "./components/ThemeSwitch/ThemeSwitch";
 import { useTheme } from "./hooks";
 
 export const links: LinksFunction = () => [
@@ -49,7 +50,15 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return json(data);
 }
 
-export default function App() {
+function App() {
+  return (
+    <Document>
+      <Outlet />
+    </Document>
+  );
+}
+
+function Document({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
   return (
     <html lang="en" className={`${theme} h-full font-sohne`}>
@@ -61,11 +70,23 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-backdrop h-full">
-        <Outlet />
+        {children}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
+  );
+}
+
+export default function AppWithProviders() {
+  return <App />;
+}
+
+export function ErrorBoundary() {
+  return (
+    <Document>
+      <GenericErrorBoundary />
+    </Document>
   );
 }

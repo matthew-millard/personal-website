@@ -12,7 +12,7 @@ const navigation = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <header className="bg-backdrop sticky -top-px z-30">
+    <header className="bg-backdrop sticky -top-px z-20">
       <nav
         aria-label="Global"
         className="border-b-edge-subtle flex items-center border-b py-4 lg:mx-auto"

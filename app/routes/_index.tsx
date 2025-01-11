@@ -1,5 +1,12 @@
 import type { MetaFunction } from "@remix-run/node";
-import { FeaturedPosts, Footer, Header, Socials } from "~/components";
+import {
+  CodeBlock,
+  DateTime,
+  FeaturedPosts,
+  Footer,
+  Header,
+  Socials,
+} from "~/components";
 
 export const meta: MetaFunction = () => [
   { title: "Matt Millard" },
@@ -14,15 +21,15 @@ export default function Index() {
   return (
     <div className="mx-auto max-w-4xl px-6 lg:px-8">
       <Header />
-      <section className="md:border-edge-subtle md:bg-backdrop-strong -md mt-12 flex flex-col-reverse items-center justify-between gap-8 overflow-hidden md:flex-row md:rounded-md md:shadow-md">
+      <section className="-md mt-12 flex flex-col-reverse items-center justify-between gap-8 overflow-hidden md:flex-row md:rounded-md md:border-edge-subtle md:bg-backdrop-strong md:shadow-md">
         {/* Left Section: Text Content */}
         <div className="flex flex-col justify-center md:pl-10">
           <div>
-            <p className="text-color-subtle text-lg">Hey, I&apos;m</p>
-            <h1 className="text-color ml-3 mt-2 text-4xl font-bold">
+            <p className="text-lg text-color-subtle">Hey, I&apos;m</p>
+            <h1 className="ml-3 mt-2 text-4xl font-bold text-color">
               Matt Millard<span className="ml-3">👋</span>
             </h1>
-            <p className="text-color-muted mt-4 max-w-md text-base">
+            <p className="mt-4 max-w-md text-base text-color-muted">
               A passionate web developer sharing guides, technical insights, and
               projects. Welcome to my portfolio and blog! 👨‍💻
             </p>
@@ -42,9 +49,32 @@ export default function Index() {
         </div>
       </section>
 
-      <main className="col-start-2 pt-24">
-        <h2 className="text-color text-xl">Featured Posts</h2>
-        <div className="border-edge mt-4 border-t pt-10">
+      <main className="col-start-2 pt-12">
+        <h2 className="text-xl text-color">Latest Coding challenge solution</h2>
+        <DateTime date="Jan 11, 2025" dateTime="2025-01-11" />
+
+        <div className="mt-4 border-t border-edge-muted py-6">
+          <CodeBlock language="tsx">
+            {`
+  // Double each value in the array in place
+  export function doubleArray(arr, index = 0) {
+  // base case
+  if (index >= arr.length) {
+    return arr;
+  }
+  // double value
+  arr[index] *= 2;
+  // call recursively
+    return doubleArray(arr, index + 1);
+  }
+
+  console.log(doubleArray([1, 2, 3, 4, 5]));
+            `}
+          </CodeBlock>
+        </div>
+
+        <h2 className="text-xl text-color">Featured Posts</h2>
+        <div className="mt-4 border-t border-edge-muted pt-10">
           <FeaturedPosts />
         </div>
       </main>

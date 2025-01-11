@@ -1,4 +1,5 @@
 import { DateTime, FeaturedPosts, CategoryTag } from "./Blog";
+import CodeBlock from "./CodeBlock";
 import { GenericErrorBoundary } from "./ErrorBoundary";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -20,4 +21,5 @@ export {
   DateTime,
   Footer,
   GenericErrorBoundary,
+  CodeBlock,
 };

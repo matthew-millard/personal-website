@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => [
   },
 ];
 
-export default function Index() {
+export default function IndexRoute() {
   return (
     <div className="mx-auto max-w-4xl px-6 lg:px-8">
       <Header />

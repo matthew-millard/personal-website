@@ -21,7 +21,7 @@ export default function IndexRoute() {
   return (
     <div className="mx-auto max-w-4xl px-6 lg:px-8">
       <Header />
-      <section className="-md mt-12 flex flex-col-reverse items-center justify-between gap-8 overflow-hidden md:flex-row md:rounded-md md:border-edge-subtle md:bg-backdrop-strong md:shadow-md">
+      <section className="md:border-edge-muted-extra mt-12 flex flex-col-reverse items-center justify-between gap-8 overflow-hidden shadow-sm md:flex-row md:rounded-md md:border md:bg-backdrop-strong">
         {/* Left Section: Text Content */}
         <div className="flex flex-col justify-center md:pl-10">
           <div>

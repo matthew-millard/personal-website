@@ -38,7 +38,10 @@ export default {
         },
         edge: {
           DEFAULT: "var(--border-color)",
-          muted: "var(--border-color-muted)",
+          muted: {
+            DEFAULT: "var(--border-color-muted)",
+            extra: "var(--border-color-muted-extra)",
+          },
           subtle: "var(--border-color-subtle)",
         },
         tag: {

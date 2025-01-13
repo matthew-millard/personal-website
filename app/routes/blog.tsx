@@ -64,8 +64,8 @@ export default function BlogRoute() {
   return (
     <div className="mx-auto flex min-h-dvh max-w-4xl flex-col px-6 lg:px-8">
       <Header />
-      <main className="flex-grow">
-        <section className="pt-20">
+      <main className="flex-grow py-24 sm:py-32">
+        <section className="">
           <h2 className="text-4xl font-semibold tracking-tight text-color sm:text-5xl">
             Blog posts
           </h2>
@@ -74,11 +74,11 @@ export default function BlogRoute() {
             development.
           </p>
         </section>
-        <section className="my-10 space-y-20">
+        <section className="mt-10 space-y-16 pt-10 sm:mt-16 sm:pt-16">
           {posts.map((post) => (
             <article
               key={post.id}
-              className="group relative isolate flex flex-col gap-8 rounded-md bg-backdrop p-10 transition-colors duration-200 hover:bg-backdrop-muted lg:flex-row"
+              className="border-edge-muted-extra group relative isolate flex flex-col gap-8 rounded-md border bg-backdrop p-6 transition-colors duration-200 hover:bg-backdrop-muted md:p-10 lg:flex-row"
             >
               <div>
                 <div className="flex items-center gap-x-4 text-xs">

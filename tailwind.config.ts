@@ -5,6 +5,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: {
+          DEFAULT: "var(--primary-color)",
+        },
         backdrop: {
           DEFAULT: "var(--backdrop-color)",
           muted: "var(--backdrop-color-muted)",

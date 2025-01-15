@@ -33,7 +33,7 @@ export default function CategoryTag({ href, title }: CategoryTagProps) {
   return (
     <Link
       to={href}
-      className={`${tagClassNames} text-tag relative z-10 rounded-full px-3 py-1.5 font-medium`}
+      className={`${tagClassNames} relative z-10 rounded-full px-3 py-1.5 text-xs font-medium text-tag`}
     >
       {title}
     </Link>

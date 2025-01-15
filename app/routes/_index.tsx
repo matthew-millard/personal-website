@@ -73,8 +73,8 @@ export default function IndexRoute() {
           </CodeBlock>
         </div>
 
-        <h2 className="text-xl text-color">Featured Posts</h2>
-        <div className="mt-4 border-t border-edge-muted pt-10">
+        <h2 className="pt-6 text-xl text-color">Featured Posts</h2>
+        <div className="mt-4 border-t border-edge-muted pb-12 pt-6">
           <FeaturedPosts />
         </div>
       </main>

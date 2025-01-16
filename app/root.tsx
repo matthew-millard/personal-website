@@ -22,6 +22,7 @@ import { useTheme } from "./hooks";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
+  { rel: "icon", type: "image/png", href: "/favicon.png" },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
@@ -69,7 +70,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-backdrop h-full">
+      <body className="h-full bg-backdrop">
         {children}
         <ScrollRestoration />
         <Scripts />

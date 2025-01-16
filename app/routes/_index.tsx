@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import {
+  Avatar,
   CodeBlock,
   DateTime,
   FeaturedPosts,
@@ -31,7 +32,8 @@ export default function IndexRoute() {
             </h1>
             <p className="mt-4 max-w-md text-base text-color-muted">
               A passionate web developer sharing guides, technical insights, and
-              projects. Welcome to my portfolio and blog! 👨‍💻
+              projects. Welcome to my portfolio and blog!
+              <Avatar />
             </p>
             <div className="mt-8">
               <Socials width={24} height={24} />

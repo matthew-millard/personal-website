@@ -32,8 +32,8 @@ export default function IndexRoute() {
             </h1>
             <p className="mt-4 max-w-md text-base text-color-muted">
               A passionate web developer sharing guides, technical insights, and
-              projects. Welcome to my portfolio and blog!
-              <Avatar />
+              projects. Welcome to my portfolio and blog! <Avatar />
+              <span className="ml-1">💻</span>
             </p>
             <div className="mt-8">
               <Socials width={24} height={24} />

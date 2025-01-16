@@ -1,3 +1,4 @@
+import Avatar from "./Avatar";
 import {
   DateTime,
   FeaturedPosts,
@@ -46,4 +47,5 @@ export {
   Figure,
   FigCaption,
   Image,
+  Avatar,
 };

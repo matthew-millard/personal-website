@@ -16,11 +16,16 @@ import {
 } from "./Blog";
 import CodeBlock from "./CodeBlock";
 import { GenericErrorBoundary } from "./ErrorBoundary";
+import FieldError from "./FieldError";
 import Footer from "./Footer";
+import FormErrors from "./FormErrors";
 import Header from "./Header";
+import Label from "./Label";
 import Logo from "./Logo";
 import RSSFeed from "./RSSFeed";
 import Socials from "./Socials";
+import SubmitButton from "./SubmitButton";
+import TextInput from "./TextInput";
 import ThemeSwitch from "./ThemeSwitch";
 import Tooltip from "./Tooltip";
 
@@ -48,4 +53,9 @@ export {
   FigCaption,
   Image,
   Avatar,
+  TextInput,
+  SubmitButton,
+  Label,
+  FieldError,
+  FormErrors,
 };

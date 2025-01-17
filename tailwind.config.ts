@@ -47,6 +47,7 @@ export default {
           },
           subtle: "var(--border-color-subtle)",
         },
+        error: "var(--error-color)",
         tag: {
           DEFAULT: "var(--tag-color)",
           algodata: {

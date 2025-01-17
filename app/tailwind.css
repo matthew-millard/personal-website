@@ -90,6 +90,9 @@
     --teal-900: #134e4a;
     --teal-950: #042f2e;
 
+    /* Error */
+    --red-600: #dc2626;
+
     --primary-color: var(--teal-600);
     --backdrop-color: var(--zinc-100);
     --backdrop-color-muted: var(--zinc-200);
@@ -120,6 +123,9 @@
     --border-color-muted: var(--zinc-400);
     --border-color-muted-extra: var(--zinc-400-muted);
     --border-color-subtle: var(--zinc-300);
+
+    --error-color: var(--red-600);
+
     /* React tooltip overrides */
     --rt-color-white: var(--zinc-50);
     --rt-color-dark: var(--zinc-950);

@@ -25,6 +25,7 @@ import Logo from "./Logo";
 import RSSFeed from "./RSSFeed";
 import Socials from "./Socials";
 import SubmitButton from "./SubmitButton";
+import TextAreaInput from "./TextAreaInput";
 import TextInput from "./TextInput";
 import ThemeSwitch from "./ThemeSwitch";
 import Tooltip from "./Tooltip";
@@ -58,4 +59,5 @@ export {
   Label,
   FieldError,
   FormErrors,
+  TextAreaInput,
 };

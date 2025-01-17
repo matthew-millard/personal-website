@@ -1,7 +1,6 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import { getAdminId } from "~/.server/auth";
-import { SubmitButton } from "~/components";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const adminId = await getAdminId(request);
@@ -16,8 +15,14 @@ export default function AdminRoute() {
     <div>
       <h1 className="text-4xl text-color">This is the admin panel</h1>
       <Form method="POST" action="/admin/logout">
-        <SubmitButton>Log out</SubmitButton>
+        <button type="submit" className="text-link">
+          Log out
+        </button>
       </Form>
+      {/* Create a link to /admin/new-blog-post */}
+      <Link to="/admin/blog/new" className="text-link">
+        Create new blog post
+      </Link>
     </div>
   );
 }

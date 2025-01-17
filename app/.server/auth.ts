@@ -38,6 +38,16 @@ export async function redirectIfAdminLoggedIn(request: Request) {
   }
 }
 
+export async function requireAdminId(request: Request) {
+  const adminId = await getAdminId(request);
+
+  if (!adminId) {
+    throw redirect("/admin/login");
+  }
+
+  return adminId;
+}
+
 export async function logoutAdmin(
   {
     request,

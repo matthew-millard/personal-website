@@ -23,7 +23,9 @@ import FormErrors from "./FormErrors";
 import Header from "./Header";
 import Label from "./Label";
 import Logo from "./Logo";
+import Options from "./Options";
 import RSSFeed from "./RSSFeed";
+import Select from "./Select";
 import Socials from "./Socials";
 import SubmitButton from "./SubmitButton";
 import TextAreaInput from "./TextAreaInput";
@@ -62,4 +64,6 @@ export {
   FormErrors,
   TextAreaInput,
   AdminIcon,
+  Select,
+  Options,
 };

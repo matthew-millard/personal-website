@@ -1,3 +1,4 @@
+import AdminIcon from "./AdminIcon";
 import Avatar from "./Avatar";
 import {
   DateTime,
@@ -60,4 +61,5 @@ export {
   FieldError,
   FormErrors,
   TextAreaInput,
+  AdminIcon,
 };

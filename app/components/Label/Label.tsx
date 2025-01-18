@@ -1,6 +1,6 @@
 interface LabelProps {
   children: React.ReactNode;
-  fieldAttributes: React.HTMLAttributes<HTMLLabelElement>;
+  fieldAttributes: React.LabelHTMLAttributes<HTMLLabelElement>;
 }
 
 export default function Label({ children, fieldAttributes }: LabelProps) {

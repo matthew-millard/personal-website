@@ -1,27 +1,39 @@
 import {
   getFormProps,
   getInputProps,
+  getSelectProps,
   getTextareaProps,
   useForm,
 } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
-import { LoaderFunctionArgs } from "@remix-run/node";
+import { Category } from "@prisma/client";
+import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { z } from "zod";
 import { requireAdminId } from "~/.server/auth";
 import {
+  Select,
   FieldError,
   FormErrors,
   Label,
   SubmitButton,
   TextAreaInput,
   TextInput,
+  Options,
 } from "~/components";
 
 const NewBlogPostSchema = z.object({
+  category: z.enum(Object.values(Category) as [string, ...string[]]),
   title: z.string().max(50),
   content: z.string(),
 });
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+
+  console.log("category:", formData.get("category"));
+  return {};
+}
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAdminId(request);
@@ -44,15 +56,38 @@ export default function BlogNewRoute() {
       <h1 className="text-2xl font-semibold text-color lg:text-4xl">
         Upload a new blog post
       </h1>
-      <Form method="POST" {...getFormProps(form)} className="mt-10 space-y-6">
+      <Form method="POST" {...getFormProps(form)} className="mt-10 space-y-3">
         <div>
-          <Label fieldAttributes={{ id: fields.title.id }}>
+          <Label fieldAttributes={{ htmlFor: "category" }}>
+            Category
+            <Select
+              fieldAttributes={{
+                ...getSelectProps(fields.category),
+                autoFocus: true,
+              }}
+            >
+              <Options>
+                <option value="">-- Select a category --</option>
+                {Object.values(Category).map((category) => (
+                  <option key={category} value={category}>
+                    {category
+                      .toLowerCase()
+                      .replace(/_/g, " ")
+                      .replace(/\b\w/g, (char) => char.toUpperCase())}
+                  </option>
+                ))}
+              </Options>
+            </Select>
+          </Label>
+          <FieldError field={fields.category} />
+        </div>
+        <div>
+          <Label fieldAttributes={{ htmlFor: fields.title.id }}>
             Title
             <TextInput
               fieldAttributes={{
                 ...getInputProps(fields.title, {
                   type: "text",
-                  autoFocus: true,
                 }),
               }}
             />
@@ -60,7 +95,7 @@ export default function BlogNewRoute() {
           <FieldError field={fields.title} />
         </div>
         <div>
-          <Label fieldAttributes={{ id: fields.content.id }}>
+          <Label fieldAttributes={{ htmlFor: fields.content.id }}>
             Content
             <TextAreaInput
               fieldAttributes={{

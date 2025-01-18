@@ -5,8 +5,10 @@ import {
   useForm,
 } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
+import { LoaderFunctionArgs } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { z } from "zod";
+import { requireAdminId } from "~/.server/auth";
 import {
   FieldError,
   FormErrors,
@@ -20,6 +22,11 @@ const NewBlogPostSchema = z.object({
   title: z.string().max(50),
   content: z.string(),
 });
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  await requireAdminId(request);
+  return {};
+}
 
 export default function BlogNewRoute() {
   const [form, fields] = useForm({

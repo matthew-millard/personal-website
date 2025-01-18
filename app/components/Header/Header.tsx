@@ -2,7 +2,8 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "@remix-run/react";
 import { useState } from "react";
-import { Logo, RSSFeed, ThemeSwitch } from "~/components";
+import { AdminIcon, Logo, RSSFeed, ThemeSwitch } from "~/components";
+import { useIsAdmin } from "~/hooks";
 
 const navigation = [
   { name: "Blog", href: "/blog" },
@@ -11,6 +12,8 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isAdmin = useIsAdmin();
+
   return (
     <header className="sticky -top-px z-20 bg-backdrop">
       <nav
@@ -42,6 +45,7 @@ export default function Header() {
           ))}
         </div>
         <div className="hidden gap-x-3 lg:flex lg:flex-1 lg:justify-end">
+          {isAdmin ? <AdminIcon /> : null}
           <ThemeSwitch />
           <RSSFeed />
         </div>
@@ -82,6 +86,7 @@ export default function Header() {
               <div className="flex gap-x-3 py-6">
                 <ThemeSwitch />
                 <RSSFeed />
+                {isAdmin ? <AdminIcon /> : null}
               </div>
             </div>
           </div>

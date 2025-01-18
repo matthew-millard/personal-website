@@ -1,3 +1,4 @@
+import useIsAdmin from "./useIsAdmin";
 import useTheme from "./useTheme";
 
-export { useTheme };
+export { useIsAdmin, useTheme };

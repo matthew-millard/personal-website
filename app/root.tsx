@@ -13,11 +13,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { updateThemeActionIntent } from "~/components/ThemeSwitch";
+import { type Theme, updateThemeActionIntent } from "~/components/ThemeSwitch";
 import stylesheet from "~/tailwind.css";
+import { getAdminId } from "./.server/auth";
 import { getThemeFromCookie, updateTheme } from "./.server/theme";
 import { GenericErrorBoundary } from "./components";
-import { type Theme } from "./components/ThemeSwitch";
 import { useTheme } from "./hooks";
 
 export const links: LinksFunction = () => [
@@ -43,9 +43,11 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const theme = getThemeFromCookie(request);
+  const admin = await getAdminId(request);
 
   const data = {
     theme: theme as Theme,
+    admin,
   };
 
   return json(data);

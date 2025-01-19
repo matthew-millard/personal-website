@@ -7,10 +7,17 @@ import {
 } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Category } from "@prisma/client";
-import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import {
+  ActionFunctionArgs,
+  json,
+  LoaderFunctionArgs,
+  redirect,
+} from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
+import slugify from "slugify";
 import { z } from "zod";
 import { requireAdminId } from "~/.server/auth";
+import { prisma } from "~/.server/db";
 import {
   Select,
   FieldError,
@@ -21,6 +28,7 @@ import {
   TextInput,
   Options,
 } from "~/components";
+import { formatCategory } from "~/utils";
 
 const NewBlogPostSchema = z.object({
   category: z.enum(Object.values(Category) as [string, ...string[]]),
@@ -29,10 +37,48 @@ const NewBlogPostSchema = z.object({
 });
 
 export async function action({ request }: ActionFunctionArgs) {
+  await requireAdminId(request);
   const formData = await request.formData();
 
-  console.log("category:", formData.get("category"));
-  return {};
+  // validate data coming from the client
+  const submission = parseWithZod(formData, {
+    schema: NewBlogPostSchema,
+  });
+
+  if (submission.status !== "success") {
+    return json(
+      submission.reply({
+        formErrors: ["Invalid submission"],
+      }),
+      {
+        status: submission.status === "error" ? 400 : 200,
+      },
+    );
+  }
+
+  const { category, content, title } = submission.value;
+
+  const slug = slugify(title, { lower: true, remove: /[*+~.()'"!:@]/g });
+
+  const newBlogPost = await prisma.blogPost.create({
+    data: {
+      category: category as Category,
+      content,
+      title,
+      slug,
+    },
+  });
+
+  if (!newBlogPost) {
+    return json(
+      submission.reply({
+        formErrors: ["Unexpected server error occured"],
+      }),
+      { status: 500 },
+    );
+  }
+
+  return redirect(`/blog/${newBlogPost.slug}`);
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -70,10 +116,7 @@ export default function BlogNewRoute() {
                 <option value="">-- Select a category --</option>
                 {Object.values(Category).map((category) => (
                   <option key={category} value={category}>
-                    {category
-                      .toLowerCase()
-                      .replace(/_/g, " ")
-                      .replace(/\b\w/g, (char) => char.toUpperCase())}
+                    {formatCategory(category)}
                   </option>
                 ))}
               </Options>

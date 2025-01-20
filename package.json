@@ -34,6 +34,7 @@
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@isaacs/express-prometheus-middleware": "^1.2.1",
+    "@js-temporal/polyfill": "^0.4.4",
     "@prisma/client": "^5.20.0",
     "@remix-run/css-bundle": "^2.15.2",
     "@remix-run/express": "^2.15.2",

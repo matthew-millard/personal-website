@@ -13,7 +13,7 @@ export default function FeaturedPosts() {
             className="mb-10 flex flex-col items-start justify-between border-b border-edge-subtle pb-10"
           >
             <div className="flex items-center gap-x-4 text-xs">
-              <DateTime dateTime={post.datetime} date={post.date} />
+              <DateTime dateTime={post.datetime} />
               <CategoryTag
                 href={post.category.href}
                 title={post.category.title}

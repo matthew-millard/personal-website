@@ -1,3 +1,5 @@
+import { Temporal } from "@js-temporal/polyfill";
+
 interface DateTimeProps {
   fontSize?: "text-xs" | "text-sm" | "text-base" | "text-lg" | "text-xl";
   fontWeight?:
@@ -9,21 +11,22 @@ interface DateTimeProps {
     | "font-bold"
     | "font-black";
   dateTime: string;
-  date: string;
 }
 
 export default function DateTime({
   fontSize = "text-xs",
   fontWeight = "font-normal",
   dateTime,
-  date,
 }: DateTimeProps) {
+  const zonedDateTime = Temporal.ZonedDateTime.from(`${dateTime}[UTC]`);
+  const formattedDate = `${zonedDateTime.day} ${zonedDateTime.toLocaleString("default", { month: "short" })}, ${zonedDateTime.year}`;
+
   return (
     <time
       dateTime={dateTime}
       className={`${fontSize} ${fontWeight} font- text-color-muted`}
     >
-      {date}
+      {formattedDate}
     </time>
   );
 }

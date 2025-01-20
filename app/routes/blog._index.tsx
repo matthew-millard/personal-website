@@ -27,11 +27,11 @@ export default function BlogRoute() {
         {posts.map((post) => (
           <article
             key={post.id}
-            className="border-edge-muted-extra group relative isolate flex flex-col gap-8 rounded-md border bg-backdrop p-6 transition-colors duration-200 hover:bg-backdrop-muted md:p-10 lg:flex-row"
+            className="group relative isolate flex flex-col gap-8 rounded-md border border-edge-muted-extra bg-backdrop p-6 transition-colors duration-200 hover:bg-backdrop-muted md:p-10 lg:flex-row"
           >
             <div>
               <div className="flex items-center gap-x-4 text-xs">
-                <DateTime date={post.date} dateTime={post.datetime} />
+                <DateTime dateTime={post.datetime} />
                 <CategoryTag
                   href={post.category.href}
                   title={post.category.title}

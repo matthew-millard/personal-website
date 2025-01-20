@@ -22,7 +22,7 @@ export default function IndexRoute() {
   return (
     <div className="mx-auto max-w-4xl px-6 lg:px-8">
       <Header />
-      <section className="md:border-edge-muted-extra mt-12 flex flex-col-reverse items-center justify-between gap-8 overflow-hidden shadow-sm md:flex-row md:rounded-md md:border md:bg-backdrop-strong">
+      <section className="mt-12 flex flex-col-reverse items-center justify-between gap-8 overflow-hidden shadow-sm md:flex-row md:rounded-md md:border md:border-edge-muted-extra md:bg-backdrop-strong">
         {/* Left Section: Text Content */}
         <div className="flex flex-col justify-center md:pl-10">
           <div>
@@ -53,7 +53,7 @@ export default function IndexRoute() {
 
       <main className="col-start-2 pt-12">
         <h2 className="text-xl text-color">Latest Coding challenge solution</h2>
-        <DateTime date="Jan 11, 2025" dateTime="2025-01-11" />
+        <DateTime dateTime="2025-01-11" />
 
         <div className="mt-4 border-t border-edge-muted py-6">
           <CodeBlock language="tsx">

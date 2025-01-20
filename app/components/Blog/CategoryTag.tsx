@@ -1,4 +1,6 @@
+import { Category } from "@prisma/client";
 import { Link } from "@remix-run/react";
+import { formatCategory } from "~/utils";
 
 interface CategoryTagProps {
   href: string;
@@ -7,15 +9,15 @@ interface CategoryTagProps {
 
 const tagColors = new Map<string, { base: string; hover: string }>([
   [
-    "Algorithms & Data Structures",
+    Category.ALGORITHMS_AND_DATA_STRUCTURES,
     { base: "bg-tag-algodata", hover: "hover:bg-tag-algodata-hover" },
   ],
   [
-    "Programming Languages",
+    Category.PROGRAMMING_LANGUAGES,
     { base: "bg-tag-proglang", hover: "hover:bg-tag-proglang-hover" },
   ],
   [
-    "Web Development",
+    Category.WEB_DEVELOPMENT,
     { base: "bg-tag-webdev", hover: "hover:bg-tag-webdev-hover" },
   ],
 ]);
@@ -35,7 +37,7 @@ export default function CategoryTag({ href, title }: CategoryTagProps) {
       to={href}
       className={`${tagClassNames} relative z-10 rounded-full px-3 py-1.5 text-xs font-medium text-tag`}
     >
-      {title}
+      {formatCategory(title)}
     </Link>
   );
 }

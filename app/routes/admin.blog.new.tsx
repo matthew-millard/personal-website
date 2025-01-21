@@ -9,7 +9,6 @@ import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Category } from "@prisma/client";
 import {
   ActionFunctionArgs,
-  json,
   LoaderFunctionArgs,
   redirect,
 } from "@remix-run/node";
@@ -46,12 +45,17 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   if (submission.status !== "success") {
-    return json(
-      submission.reply({
-        formErrors: ["Invalid submission"],
-      }),
+    return new Response(
+      JSON.stringify(
+        submission.reply({
+          formErrors: ["Invalid submission"],
+        }),
+      ),
       {
-        status: submission.status === "error" ? 400 : 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        status: 400,
       },
     );
   }
@@ -70,11 +74,18 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   if (!newBlogPost) {
-    return json(
-      submission.reply({
-        formErrors: ["Unexpected server error occured"],
-      }),
-      { status: 500 },
+    return new Response(
+      JSON.stringify(
+        submission.reply({
+          formErrors: ["Unexpected server error occured"],
+        }),
+      ),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        status: 500,
+      },
     );
   }
 

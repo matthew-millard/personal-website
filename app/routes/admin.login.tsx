@@ -2,7 +2,6 @@ import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import {
   ActionFunctionArgs,
-  json,
   LoaderFunctionArgs,
   redirect,
 } from "@remix-run/node";
@@ -46,12 +45,19 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   if (submission.status !== "success") {
-    return json(
-      submission.reply({
-        formErrors: ["Invalid email or password"],
-        hideFields: ["password"],
-      }),
-      { status: submission.status === "error" ? 400 : 200 },
+    return new Response(
+      JSON.stringify(
+        submission.reply({
+          formErrors: ["Invalid email or password"],
+          hideFields: ["password"],
+        }),
+      ),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        status: 400,
+      },
     );
   }
 

@@ -1,4 +1,4 @@
-import { json, LoaderFunctionArgs } from "@remix-run/node";
+import { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { requireAdminId } from "~/.server/auth";
 import { prisma } from "~/.server/db";
@@ -14,11 +14,17 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   });
 
   if (!blogPost) {
-    throw new Response("Sorry, we are unable to find that blog post.", {
+    throw new Response(`Blog post not found for slug: ${slug}`, {
       status: 404,
     });
   }
-  return json({ blogPost });
+
+  return new Response(JSON.stringify({ blogPost }), {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    status: 200,
+  });
 }
 
 export default function BlogPostRoute() {
@@ -39,7 +45,7 @@ export default function BlogPostRoute() {
         <CategoryTag title={blogPost.category} href={"/blog"} />
       </div>
       <H1>{blogPost.title}</H1>
-      <section>{blogPost.content}</section>
+      <article>{blogPost.content}</article>
     </div>
   );
 }

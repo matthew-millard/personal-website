@@ -1,7 +1,6 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import {
   ActionFunctionArgs,
-  json,
   type LinksFunction,
   type LoaderFunctionArgs,
 } from "@remix-run/node";
@@ -34,10 +33,7 @@ export async function action({ request }: ActionFunctionArgs) {
     case updateThemeActionIntent:
       return updateTheme(formData);
     default:
-      return json(
-        { status: "error", message: "Invalid intent" },
-        { status: 400 },
-      );
+      throw new Response("Invalid intent", { status: 400 });
   }
 }
 
@@ -50,7 +46,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
     admin,
   };
 
-  return json(data);
+  return new Response(JSON.stringify(data), {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    status: 200,
+  });
 }
 
 function App() {

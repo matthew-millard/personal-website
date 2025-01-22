@@ -1,10 +1,12 @@
-export interface H1Props {
-  children?: React.ReactNode;
-}
-
-export default function H1({ children }: H1Props) {
+export default function H1({
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<"h1">) {
   return (
-    <h1 className="mt-10 text-pretty text-4xl font-semibold tracking-tight text-color sm:text-5xl">
+    <h1
+      {...props}
+      className="mt-10 text-pretty text-5xl font-bold leading-tight text-color"
+    >
       {children}
     </h1>
   );

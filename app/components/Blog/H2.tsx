@@ -1,10 +1,12 @@
-interface H2Props {
-  children?: React.ReactNode;
-}
-
-export default function H2({ children }: H2Props) {
+export default function H2({
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<"h2">) {
   return (
-    <h2 className="mt-16 text-pretty text-3xl font-semibold tracking-tight text-color">
+    <h2
+      {...props}
+      className="mt-10 text-pretty text-4xl font-semibold leading-snug text-color"
+    >
       {children}
     </h2>
   );

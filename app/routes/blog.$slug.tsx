@@ -5,11 +5,15 @@ import { useMemo } from "react";
 import { requireAdminId } from "~/.server/auth";
 import { prisma } from "~/.server/db";
 import { compileAndBundleMDX } from "~/.server/mdx.server";
-import { H1, H2, Image, P } from "~/components";
+import { H1, H2, H3, H4, H5, H6, Image, P } from "~/components";
 
 const components = {
   h1: (props: React.ComponentPropsWithoutRef<"h1">) => <H1 {...props} />,
   h2: (props: React.ComponentPropsWithoutRef<"h2">) => <H2 {...props} />,
+  h3: (props: React.ComponentPropsWithoutRef<"h3">) => <H3 {...props} />,
+  h4: (props: React.ComponentPropsWithoutRef<"h4">) => <H4 {...props} />,
+  h5: (props: React.ComponentPropsWithoutRef<"h5">) => <H5 {...props} />,
+  h6: (props: React.ComponentPropsWithoutRef<"h6">) => <H6 {...props} />,
   p: (props: React.ComponentPropsWithoutRef<"p">) => <P {...props} />,
   img: (props: React.ComponentPropsWithoutRef<"img">) => <Image {...props} />,
 };

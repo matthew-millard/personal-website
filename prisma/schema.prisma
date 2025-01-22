@@ -34,13 +34,14 @@ model Session {
 }
 
 model BlogPost {
-  id        String   @id @default(cuid())
-  slug      String   @unique
-  title     String   @unique
-  category  Category
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String   @unique
+  description String
+  category    Category
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum Category {

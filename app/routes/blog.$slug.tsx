@@ -18,6 +18,7 @@ import {
   Code,
   HR,
   OrderedList,
+  UnorderedList,
 } from "~/components";
 
 const MDXComponents = {
@@ -40,6 +41,9 @@ const MDXComponents = {
   code: (props: React.ComponentPropsWithoutRef<"code">) => <Code {...props} />,
   ol: (props: React.ComponentPropsWithoutRef<"ol">) => (
     <OrderedList {...props} />
+  ),
+  ul: (props: React.ComponentPropsWithoutRef<"ul">) => (
+    <UnorderedList {...props} />
   ),
 };
 

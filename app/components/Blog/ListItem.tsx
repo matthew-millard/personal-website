@@ -1,19 +1,13 @@
-interface ListItemProps {
-  label?: string;
-  description: string;
-}
+import React from "react";
 
-export default function ListItem({ label, description }: ListItemProps) {
+export default function ListItem({
+  children,
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"li">) {
   return (
-    <li>
-      <span aria-labelledby="item-label" aria-describedby="item-description">
-        <strong id="item-label" className="mr-2 font-semibold text-color">
-          {label}
-        </strong>
-        <span id="item-description" className="text-color-muted">
-          {description}
-        </span>
-      </span>
+    <li {...props} className={`leading-relaxed ${className}`}>
+      {children}
     </li>
   );
 }

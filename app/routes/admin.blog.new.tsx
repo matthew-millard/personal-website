@@ -32,6 +32,7 @@ import { formatCategory } from "~/utils";
 const NewBlogPostSchema = z.object({
   category: z.enum(Object.values(Category) as [string, ...string[]]),
   title: z.string().max(50),
+  description: z.string().max(150),
   content: z.string(),
 });
 
@@ -60,7 +61,7 @@ export async function action({ request }: ActionFunctionArgs) {
     );
   }
 
-  const { category, content, title } = submission.value;
+  const { category, content, description, title } = submission.value;
 
   const slug = slugify(title, { lower: true, remove: /[*+~.()'"!:@]/g });
 
@@ -68,6 +69,7 @@ export async function action({ request }: ActionFunctionArgs) {
     data: {
       category: category as Category,
       content,
+      description,
       title,
       slug,
     },
@@ -147,6 +149,19 @@ export default function BlogNewRoute() {
             />
           </Label>
           <FieldError field={fields.title} />
+        </div>
+        <div>
+          <Label fieldAttributes={{ htmlFor: fields.description.id }}>
+            Description
+            <TextInput
+              fieldAttributes={{
+                ...getInputProps(fields.description, {
+                  type: "text",
+                }),
+              }}
+            />
+          </Label>
+          <FieldError field={fields.description} />
         </div>
         <div>
           <Label fieldAttributes={{ htmlFor: fields.content.id }}>

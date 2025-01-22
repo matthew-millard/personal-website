@@ -1,13 +1,13 @@
-interface ImageProps {
-  imageUrl: string;
-  altText: string;
-}
-
-export default function Image({ imageUrl, altText }: ImageProps) {
+export default function Image({
+  src,
+  alt,
+  ...props
+}: React.ComponentPropsWithoutRef<"img">) {
   return (
     <img
-      src={imageUrl}
-      alt={altText}
+      src={src}
+      alt={alt}
+      {...props}
       className="aspect-video rounded-sm object-cover"
     />
   );

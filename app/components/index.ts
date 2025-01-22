@@ -6,6 +6,7 @@ import {
   CategoryTag,
   NoBlogPosts,
   UnorderedList,
+  OrderedList,
   ReadTime,
   ListItem,
   H1,
@@ -18,6 +19,8 @@ import {
   Figure,
   FigCaption,
   Image,
+  Code,
+  HR,
 } from "./Blog";
 import CodeBlock from "./CodeBlock";
 import { GenericErrorBoundary } from "./ErrorBoundary";
@@ -49,10 +52,12 @@ export {
   DateTime,
   Footer,
   GenericErrorBoundary,
+  Code,
   CodeBlock,
   NoBlogPosts,
   ReadTime,
   UnorderedList,
+  OrderedList,
   ListItem,
   H1,
   H2,
@@ -60,6 +65,7 @@ export {
   H4,
   H5,
   H6,
+  HR,
   P,
   Figure,
   FigCaption,

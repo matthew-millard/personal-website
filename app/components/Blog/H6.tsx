@@ -5,7 +5,7 @@ export default function H6({
   return (
     <h6
       {...props}
-      className="mt-3 text-pretty text-lg font-medium leading-relaxed text-color"
+      className="mt-3 text-pretty text-lg leading-relaxed text-color"
     >
       {children}
     </h6>

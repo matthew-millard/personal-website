@@ -2,7 +2,6 @@ import Anchor from "./Anchor";
 import CategoryTag from "./CategoryTag";
 import Code from "./Code";
 import DateTime from "./DateTime";
-import FeaturedPosts from "./FeaturedPosts";
 import FigCaption from "./FigCaption";
 import Figure from "./Figure";
 import H1 from "./H1";
@@ -22,7 +21,6 @@ import Strong from "./Strong";
 import UnorderedList from "./UnorderedList";
 
 export {
-  FeaturedPosts,
   CategoryTag,
   DateTime,
   NoBlogPosts,

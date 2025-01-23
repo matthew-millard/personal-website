@@ -2,7 +2,7 @@ import classNames from "./classNames";
 import combineHeaders from "./combineHeaders";
 import combineResponseInits from "./combineResponseInits";
 import hashPassword from "./hashPassword";
-import { formatCategory } from "./misc";
+import { formatCategory, formatCategoryToSlug } from "./misc";
 
 export {
   hashPassword,
@@ -10,4 +10,5 @@ export {
   combineHeaders,
   combineResponseInits,
   formatCategory,
+  formatCategoryToSlug,
 };

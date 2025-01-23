@@ -3,7 +3,6 @@ import Avatar from "./Avatar";
 import {
   Anchor,
   DateTime,
-  FeaturedPosts,
   CategoryTag,
   NoBlogPosts,
   UnorderedList,
@@ -49,7 +48,6 @@ export {
   RSSFeed,
   Tooltip,
   Socials,
-  FeaturedPosts,
   CategoryTag,
   DateTime,
   Footer,

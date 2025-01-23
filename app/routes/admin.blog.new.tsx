@@ -31,9 +31,11 @@ import { formatCategory } from "~/utils";
 
 const NewBlogPostSchema = z.object({
   category: z.enum(Object.values(Category) as [string, ...string[]]),
-  title: z.string().max(50),
-  description: z.string().max(150),
+  title: z.string().min(1).max(50),
+  description: z.string().min(1).max(150),
   content: z.string(),
+  imageUrl: z.string().url(),
+  altText: z.string().min(1).max(125),
 });
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -61,15 +63,18 @@ export async function action({ request }: ActionFunctionArgs) {
     );
   }
 
-  const { category, content, description, title } = submission.value;
+  const { altText, category, content, description, imageUrl, title } =
+    submission.value;
 
   const slug = slugify(title, { lower: true, remove: /[*+~.()'"!:@]/g });
 
   const newBlogPost = await prisma.blogPost.create({
     data: {
+      altText,
       category: category as Category,
       content,
       description,
+      imageUrl,
       title,
       slug,
     },
@@ -162,6 +167,32 @@ export default function BlogNewRoute() {
             />
           </Label>
           <FieldError field={fields.description} />
+        </div>
+        <div>
+          <Label fieldAttributes={{ htmlFor: fields.imageUrl.id }}>
+            Image Url
+            <TextInput
+              fieldAttributes={{
+                ...getInputProps(fields.imageUrl, {
+                  type: "text",
+                }),
+              }}
+            />
+          </Label>
+          <FieldError field={fields.imageUrl} />
+        </div>
+        <div>
+          <Label fieldAttributes={{ htmlFor: fields.altText.id }}>
+            Alt Text
+            <TextInput
+              fieldAttributes={{
+                ...getInputProps(fields.altText, {
+                  type: "text",
+                }),
+              }}
+            />
+          </Label>
+          <FieldError field={fields.altText} />
         </div>
         <div>
           <Label fieldAttributes={{ htmlFor: fields.content.id }}>

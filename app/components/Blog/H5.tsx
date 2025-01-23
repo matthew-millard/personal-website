@@ -5,7 +5,7 @@ export default function H5({
   return (
     <h5
       {...props}
-      className="mt-4 text-pretty text-xl leading-normal text-color"
+      className="mt-4 text-pretty text-xl font-medium leading-normal text-color"
     >
       {children}
     </h5>

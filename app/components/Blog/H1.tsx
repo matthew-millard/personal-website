@@ -5,7 +5,7 @@ export default function H1({
   return (
     <h1
       {...props}
-      className="mt-10 text-pretty text-5xl leading-tight text-color"
+      className="mt-10 text-pretty text-5xl font-bold leading-tight text-color"
     >
       {children}
     </h1>

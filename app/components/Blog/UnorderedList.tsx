@@ -6,10 +6,10 @@ export default function UnorderedList({
   ...props
 }: React.ComponentPropsWithoutRef<"ul">) {
   return (
-    <ul {...props} className="list-inside list-disc space-y-2 text-color">
+    <ul {...props} className="list-disc space-y-2 pl-4 text-color">
       {React.Children.map(children, (child) =>
         React.isValidElement(child) && child.type === "li" ? (
-          <ListItem {...child.props} className="mt-3">
+          <ListItem {...child.props} className="">
             {child.props.children}
           </ListItem>
         ) : (

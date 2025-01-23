@@ -21,6 +21,7 @@ export default {
           DEFAULT: "var(--text-color)",
           muted: "var(--text-color-muted)",
           subtle: "var(--text-color-subtle)",
+          strong: "var(--text-color-strong)",
         },
         link: {
           DEFAULT: "var(--link-color)",

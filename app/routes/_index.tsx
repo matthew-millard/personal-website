@@ -1,26 +1,41 @@
 import type { MetaFunction } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { prisma } from "~/.server/db";
 import {
   Avatar,
-  CodeBlock,
+  CategoryTag,
   DateTime,
-  FeaturedPosts,
   Footer,
   Header,
+  NoBlogPosts,
   Socials,
 } from "~/components";
+import { formatCategoryToSlug } from "~/utils";
 
-export const meta: MetaFunction = () => [
-  { title: "Matt Millard" },
-  {
-    name: "description",
-    content:
-      "I'm Matt. Welcome to my portfolio and blog, where I share web development guides, technical insights, and projects.",
-  },
-];
+export async function loader() {
+  const featuredBlogPosts = await prisma.blogPost.findMany({
+    orderBy: {
+      createdAt: "desc", // Newest posts first
+    },
+    select: {
+      category: true,
+      createdAt: true,
+      description: true,
+      id: true,
+      slug: true,
+      title: true,
+    },
+    take: 3, // Limit to 3
+  });
+
+  return { featuredBlogPosts };
+}
 
 export default function IndexRoute() {
+  const { featuredBlogPosts } = useLoaderData<typeof loader>();
+
   return (
-    <div className="mx-auto max-w-4xl px-6 lg:px-8">
+    <div className="mx-auto flex min-h-dvh max-w-4xl flex-col px-6 lg:px-8">
       <Header />
       <section className="mt-12 flex flex-col-reverse items-center justify-between gap-8 overflow-hidden shadow-sm md:flex-row md:rounded-md md:border md:border-edge-muted-extra md:bg-backdrop-strong">
         {/* Left Section: Text Content */}
@@ -51,37 +66,56 @@ export default function IndexRoute() {
         </div>
       </section>
 
-      <main className="col-start-2 pt-12">
-        <h2 className="text-xl text-color">Latest Coding challenge solution</h2>
-        <DateTime dateTime="2025-01-11" />
-
-        <div className="mt-4 border-t border-edge-muted py-6">
-          <CodeBlock language="tsx">
-            {`
-  // Double each value in the array in place
-  export function doubleArray(arr, index = 0) {
-  // base case
-  if (index >= arr.length) {
-    return arr;
-  }
-  // double value
-  arr[index] *= 2;
-  // call recursively
-    return doubleArray(arr, index + 1);
-  }
-
-  console.log(doubleArray([1, 2, 3, 4, 5]));
-            `}
-          </CodeBlock>
-        </div>
-
-        <h2 className="pt-6 text-xl text-color">Featured Posts</h2>
-        <div className="mt-4 border-t border-edge-muted pb-12 pt-6">
-          <FeaturedPosts />
+      <main className="col-start-2 flex-grow pt-12">
+        <h2 className="pt-6 text-2xl font-semibold text-color">
+          Featured Posts
+        </h2>
+        <div className="mt-4 border-t border-edge-muted-extra pb-12 pt-6">
+          <div>
+            {featuredBlogPosts.length > 0 ? (
+              featuredBlogPosts.map((post) => (
+                <article
+                  key={post.id}
+                  className="mb-10 flex flex-col items-start justify-between border-b border-edge-subtle pb-10"
+                >
+                  <Link to={`/blog/${post.slug}`} className="w-full">
+                    <div className="flex items-center gap-x-4 text-xs">
+                      <DateTime dateTime={post.createdAt} />
+                      <CategoryTag
+                        href={`/blog/category/${formatCategoryToSlug(post.category)}`}
+                        title={post.category}
+                      />
+                    </div>
+                    <div className="group relative">
+                      <h3 className="mt-3 text-lg/6 font-semibold text-color group-hover:text-color-subtle">
+                        <a href={`/blog/${post.slug}`}>
+                          <span className="absolute inset-0" />
+                          {post.title}
+                        </a>
+                      </h3>
+                      <p className="mt-5 line-clamp-3 max-w-xl text-sm/6 text-color group-hover:text-color-subtle">
+                        {post.description}
+                      </p>
+                    </div>
+                  </Link>
+                </article>
+              ))
+            ) : (
+              <NoBlogPosts />
+            )}
+          </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );
 }
+
+export const meta: MetaFunction = () => [
+  { title: "Matt Millard" },
+  {
+    name: "description",
+    content:
+      "I'm Matt. Welcome to my portfolio and blog, where I share web development guides, technical insights, and projects.",
+  },
+];

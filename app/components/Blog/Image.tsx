@@ -12,7 +12,7 @@ export default function Image({ src, alt, title, ...props }: ImageProps) {
         src={src}
         alt={alt}
         {...props}
-        className="aspect-video rounded-sm object-cover"
+        className="aspect-video overflow-hidden rounded-md object-cover shadow-lg"
       />
       {title ? <FigCaption>{title}</FigCaption> : null}
     </Figure>

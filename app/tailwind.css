@@ -104,6 +104,7 @@
     --text-color: var(--zinc-950);
     --text-color-muted: var(--zinc-800);
     --text-color-subtle: var(--zinc-500);
+    --text-color-strong: black;
 
     --link-color: var(--zinc-950);
     --link-color-muted: var(--zinc-800);
@@ -151,6 +152,7 @@
     --text-color: var(--zinc-100);
     --text-color-muted: var(--zinc-300);
     --text-color-subtle: var(--zinc-400);
+    --text-color-strong: white;
 
     --link-color: var(--zinc-100);
     --link-color-muted: var(--zinc-300);

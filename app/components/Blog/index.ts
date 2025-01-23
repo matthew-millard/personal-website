@@ -1,3 +1,4 @@
+import Anchor from "./Anchor";
 import CategoryTag from "./CategoryTag";
 import Code from "./Code";
 import DateTime from "./DateTime";
@@ -17,6 +18,7 @@ import NoBlogPosts from "./NoBlogPosts";
 import OrderedList from "./OrderedList";
 import P from "./P";
 import ReadTime from "./ReadTime";
+import Strong from "./Strong";
 import UnorderedList from "./UnorderedList";
 
 export {
@@ -40,4 +42,6 @@ export {
   FigCaption,
   Image,
   Code,
+  Anchor,
+  Strong,
 };

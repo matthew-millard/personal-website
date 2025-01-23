@@ -5,7 +5,10 @@ interface PProps extends React.ComponentPropsWithoutRef<"p"> {
 
 export default function P({ children, marginTop = "mt-6", ...props }: PProps) {
   return (
-    <p className={`text-base text-color ${marginTop}`} {...props}>
+    <p
+      className={`font-normal leading-relaxed text-color ${marginTop}`}
+      {...props}
+    >
       {children}
     </p>
   );

@@ -2,7 +2,6 @@ import { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
 import React, { useMemo } from "react";
-import { requireAdminId } from "~/.server/auth";
 import { prisma } from "~/.server/db";
 import { compileAndBundleMDX } from "~/.server/mdx.server";
 import {
@@ -19,6 +18,8 @@ import {
   HR,
   OrderedList,
   UnorderedList,
+  Anchor,
+  Strong,
 } from "~/components";
 
 const MDXComponents = {
@@ -29,7 +30,16 @@ const MDXComponents = {
   h5: (props: React.ComponentPropsWithoutRef<"h5">) => <H5 {...props} />,
   h6: (props: React.ComponentPropsWithoutRef<"h6">) => <H6 {...props} />,
   hr: () => <HR />,
-  p: (props: React.ComponentPropsWithoutRef<"p">) => <P {...props} />,
+  p: (props: React.ComponentPropsWithoutRef<"p">) => {
+    const { children } = props;
+    if (typeof children !== "string" && React.isValidElement(children)) {
+      return <>{children}</>;
+    }
+    return <P {...props} />;
+  },
+  strong: (props: React.ComponentPropsWithoutRef<"strong">) => (
+    <Strong {...props} />
+  ),
   img: (props: React.ComponentPropsWithoutRef<"img">) => <Image {...props} />,
   pre: ({ children, ...props }: React.ComponentPropsWithoutRef<"pre">) => {
     if (React.isValidElement(children) && children.props) {
@@ -45,10 +55,10 @@ const MDXComponents = {
   ul: (props: React.ComponentPropsWithoutRef<"ul">) => (
     <UnorderedList {...props} />
   ),
+  a: (props: React.ComponentPropsWithoutRef<"a">) => <Anchor {...props} />,
 };
 
-export async function loader({ request, params }: LoaderFunctionArgs) {
-  await requireAdminId(request);
+export async function loader({ params }: LoaderFunctionArgs) {
   const { slug } = params;
   const blogPost = await prisma.blogPost.findFirst({
     where: {

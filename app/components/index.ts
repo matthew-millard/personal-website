@@ -1,6 +1,7 @@
 import AdminIcon from "./AdminIcon";
 import Avatar from "./Avatar";
 import {
+  Anchor,
   DateTime,
   FeaturedPosts,
   CategoryTag,
@@ -21,6 +22,7 @@ import {
   Image,
   Code,
   HR,
+  Strong,
 } from "./Blog";
 import CodeBlock from "./CodeBlock";
 import { GenericErrorBoundary } from "./ErrorBoundary";
@@ -80,4 +82,6 @@ export {
   AdminIcon,
   Select,
   Options,
+  Anchor,
+  Strong,
 };

@@ -1,13 +1,18 @@
+import clsx from "clsx";
+
 interface PProps extends React.ComponentPropsWithoutRef<"p"> {
   children?: React.ReactNode;
-  marginTop?: "mt-2" | "mt-3" | "mt-4" | "mt-6" | "mt-8";
+  additionalClasses?: string;
 }
 
-export default function P({ children, marginTop = "mt-6", ...props }: PProps) {
+export default function P({ children, additionalClasses, ...props }: PProps) {
   return (
     <p
-      className={`font-normal leading-relaxed text-color ${marginTop}`}
       {...props}
+      className={clsx(
+        "font-normal leading-relaxed tracking-normal text-color",
+        additionalClasses,
+      )}
     >
       {children}
     </p>

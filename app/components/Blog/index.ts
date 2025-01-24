@@ -10,6 +10,7 @@ import H3 from "./H3";
 import H4 from "./H4";
 import H5 from "./H5";
 import H6 from "./H6";
+import Highlight from "./Highlight";
 import HR from "./HR";
 import Image from "./Image";
 import ListItem from "./ListItem";
@@ -17,6 +18,7 @@ import NoBlogPosts from "./NoBlogPosts";
 import OrderedList from "./OrderedList";
 import P from "./P";
 import ReadTime from "./ReadTime";
+import Small from "./Small";
 import Strong from "./Strong";
 import UnorderedList from "./UnorderedList";
 
@@ -42,4 +44,6 @@ export {
   Code,
   Anchor,
   Strong,
+  Small,
+  Highlight,
 };

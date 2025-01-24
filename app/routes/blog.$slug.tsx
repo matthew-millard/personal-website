@@ -20,22 +20,25 @@ import {
   UnorderedList,
   Anchor,
   Strong,
+  Highlight,
 } from "~/components";
 
 const MDXComponents = {
-  h1: (props: React.ComponentPropsWithoutRef<"h1">) => <H1 {...props} />,
+  h1: (props: React.ComponentPropsWithoutRef<"h1">) => (
+    <H1 {...props} additionalClasses="mt-12" />
+  ),
   h2: (props: React.ComponentPropsWithoutRef<"h2">) => <H2 {...props} />,
   h3: (props: React.ComponentPropsWithoutRef<"h3">) => <H3 {...props} />,
   h4: (props: React.ComponentPropsWithoutRef<"h4">) => <H4 {...props} />,
   h5: (props: React.ComponentPropsWithoutRef<"h5">) => <H5 {...props} />,
   h6: (props: React.ComponentPropsWithoutRef<"h6">) => <H6 {...props} />,
-  hr: () => <HR />,
+  hr: () => <HR additionalClasses="my-12" />,
   p: (props: React.ComponentPropsWithoutRef<"p">) => {
     const { children } = props;
     if (typeof children !== "string" && React.isValidElement(children)) {
       return <>{children}</>;
     }
-    return <P {...props} />;
+    return <P {...props} additionalClasses="leading-relaxed" />;
   },
   strong: (props: React.ComponentPropsWithoutRef<"strong">) => (
     <Strong {...props} />
@@ -56,6 +59,9 @@ const MDXComponents = {
     <UnorderedList {...props} />
   ),
   a: (props: React.ComponentPropsWithoutRef<"a">) => <Anchor {...props} />,
+  mark: (props: React.ComponentPropsWithoutRef<"mark">) => (
+    <Highlight {...props} />
+  ),
 };
 
 export async function loader({ params }: LoaderFunctionArgs) {

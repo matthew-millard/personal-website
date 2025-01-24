@@ -4,7 +4,22 @@ import { prisma } from "~/.server/db";
 import { CategoryTag, DateTime } from "~/components";
 
 export async function loader() {
-  const blogPosts = await prisma.blogPost.findMany();
+  const blogPosts = await prisma.blogPost.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      altText: true,
+      category: true,
+      createdAt: true,
+      description: true,
+      id: true,
+      imageUrl: true,
+      slug: true,
+      title: true,
+      updatedAt: true,
+    },
+  });
 
   return { blogPosts };
 }

@@ -21,7 +21,9 @@ import {
   Image,
   Code,
   HR,
+  Small,
   Strong,
+  Highlight,
 } from "./Blog";
 import CodeBlock from "./CodeBlock";
 import { GenericErrorBoundary } from "./ErrorBoundary";
@@ -34,6 +36,7 @@ import Logo from "./Logo";
 import Options from "./Options";
 import RSSFeed from "./RSSFeed";
 import Select from "./Select";
+
 import Socials from "./Socials";
 import SubmitButton from "./SubmitButton";
 import TextAreaInput from "./TextAreaInput";
@@ -82,4 +85,6 @@ export {
   Options,
   Anchor,
   Strong,
+  Small,
+  Highlight,
 };

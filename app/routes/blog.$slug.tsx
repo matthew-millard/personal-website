@@ -2,6 +2,7 @@ import { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
 import React, { useMemo } from "react";
+import { ENV } from "env";
 import { prisma } from "~/.server/db";
 import { compileAndBundleMDX } from "~/.server/mdx.server";
 import {
@@ -100,16 +101,47 @@ export default function BlogPostRoute() {
   );
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
+  const title = data?.blogPost.title || data?.frontmatter.title;
+  const description =
+    data?.blogPost.description || data?.frontmatter.description;
+
+  const author = "Matt Millard";
+  const siteName = "Matt Millard";
+
+  const baseUrl = ENV.BASE_URL || "http://localhost:3000";
+  const url = `${baseUrl}${location.pathname}`;
+
+  const imageUrl = data?.blogPost.imageUrl;
+  const altText = data?.blogPost.altText;
+
+  const publishedTime = data?.blogPost.createdAt;
+  const modifiedTime = data?.blogPost.updatedAt;
+
   return [
-    { title: `${data?.blogPost.title} | Matt Millard` },
-    {
-      name: "description",
-      content: `${data?.blogPost.description}`,
-    },
-    {
-      name: "author",
-      content: "Matt Millard",
-    },
+    // Basic Metadata
+    { title: `${title} | ${siteName}` },
+    { name: "description", content: description },
+    { name: "author", content: author },
+
+    // Twitter Card Metadata
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: imageUrl },
+    { name: "twitter:image:alt", content: altText },
+
+    // Open Graph Metadata
+    { name: "og:title", content: title },
+    { name: "og:type", content: "article" },
+    { name: "og:image", content: imageUrl },
+    { name: "og:url", content: url },
+    { name: "og:site_name", content: siteName },
+    { name: "og:image:alt", content: altText },
+
+    // Article Metadata
+    { name: "article:published_time", content: publishedTime },
+    { name: "article:modified_time", content: modifiedTime },
+    { name: "article:author", content: author },
   ];
 };

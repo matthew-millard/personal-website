@@ -1,13 +1,19 @@
-export default function H3({
-  children,
-  ...props
-}: React.ComponentPropsWithoutRef<"h3">) {
+import clsx from "clsx";
+
+interface H3Props extends React.ComponentPropsWithoutRef<"h3"> {
+  additionalClasses?: string;
+}
+
+export default function H3({ children, additionalClasses, ...props }: H3Props) {
   return (
-    <h1
+    <h3
       {...props}
-      className="mt-10 text-pretty text-3xl font-semibold leading-snug text-color"
+      className={clsx(
+        "text-pretty text-3xl font-semibold leading-snug tracking-normal text-color",
+        additionalClasses,
+      )}
     >
       {children}
-    </h1>
+    </h3>
   );
 }

@@ -10,11 +10,11 @@ I want to share how I generated a dynamic Sitemap for my new personal website. W
 
 ## Why Do You Need a Sitemap?
 
-A **Sitemap** is a file that provides information about the pages, images, and other files on your website. It helps search engines like Google crawl your website more effectively and can improve your SEO. You can learn more about the protocol on the official [sitemaps.org website](https://www.sitemaps.org/protocol.html).
+A **Sitemap** is a file that provides information about the pages, images, and other files on your website. It helps search engines like <mark>Google crawl your website more effectively</mark> and can improve your SEO. You can learn more about the protocol on the official [sitemaps.org website](https://www.sitemaps.org/protocol.html).
 
 ---
 
-### Create a New (Resource) Route
+### Step 1: Create a New (Resource) Route
 
 I started by creating a new file: `app/routes/[sitemap.xml].tsx.`
 
@@ -22,7 +22,7 @@ The escape syntax `[]` is part of Remix’s file-based routing system, allowing 
 
 ---
 
-### Write the Loader Function
+### Step 2: Write the Loader Function
 
 The Sitemap route is a **resource route**, meaning it only returns data (in this case, an **XML file**). It doesn’t render a component. Here’s the `loader` function to handle `GET` requests for the Sitemap:
 
@@ -49,7 +49,7 @@ This function creates an empty Sitemap for now, returning it with the correct Co
 
 ---
 
-### Generate a Sitemap for Static Pages
+### Step 3: Generate a Sitemap for Static Pages
 
 To begin, I created a simple XML structure for the static pages on my website using [sitemaps.org website](https://www.sitemaps.org/protocol.html) as a guide. Here’s what the original format looked like:
 
@@ -149,7 +149,7 @@ export async function loader() {
 
 ---
 
-### Add Dynamic Pages to Your Sitemap
+### Step4: Add Dynamic Pages to Your Sitemap
 
 If your website includes dynamic pages, you'll want to include them in your Sitemap. Here’s how I added dynamic blog posts to my Sitemap using Prisma:
 
@@ -228,7 +228,7 @@ export async function loader() {
 
 ---
 
-### Test Your Sitemap
+### Step 5: Test Your Sitemap
 
 ![XML Sitemap code snippet](https://res.cloudinary.com/hospohub/image/upload/v1737609561/blog_generate_a_dynamic_sitemap_in_remix_zzdlho.png "My XML Sitemap code snippet")
 

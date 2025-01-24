@@ -3,5 +3,5 @@ interface FigureProps {
 }
 
 export default function Figure({ children }: FigureProps) {
-  return <figure className="mt-16">{children}</figure>;
+  return <figure className="my-12">{children}</figure>;
 }

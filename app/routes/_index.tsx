@@ -82,22 +82,24 @@ export default function IndexRoute() {
                 key={post.id}
                 className="mt-12 flex flex-col items-start justify-between"
               >
-                <Link to={`/blog/${post.slug}`} className="w-full">
-                  <div className="flex items-center gap-x-4 text-xs">
-                    <DateTime dateTime={post.createdAt} />
-                    <CategoryTag
-                      href={`/blog/category/${formatCategoryToSlug(post.category)}`}
-                      title={post.category}
-                    />
-                  </div>
-                  <div className="group relative">
-                    <H4 additionalClasses="mt-2 group-hover:text-color-hover">
-                      {post.title}
-                    </H4>
-                    <Small additionalClasses="group-hover:text-color-hover mt-1 max-w-xl">
-                      {post.description}
-                    </Small>
-                  </div>
+                <div className="flex items-center gap-x-4 text-xs">
+                  <DateTime dateTime={post.createdAt} />
+                  <CategoryTag
+                    href={`/blog/category/${formatCategoryToSlug(post.category)}`}
+                    title={post.category}
+                  />
+                </div>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  prefetch="intent"
+                  className="group relative"
+                >
+                  <H4 additionalClasses="mt-2 group-hover:text-color-hover">
+                    {post.title}
+                  </H4>
+                  <Small additionalClasses="group-hover:text-color-hover mt-1 max-w-xl">
+                    {post.description}
+                  </Small>
                 </Link>
               </article>
             ))

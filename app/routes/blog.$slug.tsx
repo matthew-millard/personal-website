@@ -109,7 +109,12 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
   const author = "Matt Millard";
   const siteName = "Matt Millard";
 
-  const baseUrl = ENV.BASE_URL || "http://localhost:3000";
+  console.log(location.pathname);
+
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? ENV.BASE_URL
+      : "http://localhost:3000";
   const url = `${baseUrl}${location.pathname}`;
 
   const imageUrl = data?.blogPost.imageUrl;

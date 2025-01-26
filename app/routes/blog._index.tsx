@@ -111,5 +111,8 @@ export const meta: MetaFunction = ({ location }) => {
     { name: "og:site_name", content: siteName },
     { name: "og:image", content: imageUrl },
     { name: "og:image:alt", content: altText },
+    { name: "og:image:type", content: "image/jpeg" },
+    { name: "og:image:width", content: "400" },
+    { name: "og:image:height", content: "300" },
   ];
 };

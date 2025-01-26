@@ -22,12 +22,12 @@ import {
   Anchor,
   Strong,
   Highlight,
+  DateTime,
+  ReadTime,
 } from "~/components";
 
 const MDXComponents = {
-  h1: (props: React.ComponentPropsWithoutRef<"h1">) => (
-    <H1 {...props} additionalClasses="mt-12" />
-  ),
+  h1: (props: React.ComponentPropsWithoutRef<"h1">) => <H1 {...props} />,
   h2: (props: React.ComponentPropsWithoutRef<"h2">) => <H2 {...props} />,
   h3: (props: React.ComponentPropsWithoutRef<"h3">) => <H3 {...props} />,
   h4: (props: React.ComponentPropsWithoutRef<"h4">) => <H4 {...props} />,
@@ -99,14 +99,26 @@ export async function loader({ params }: LoaderFunctionArgs) {
 }
 
 export default function BlogPostRoute() {
-  const { code } = useLoaderData<typeof loader>();
+  const { blogPost, code } = useLoaderData<typeof loader>();
 
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
-    <article>
-      <Component components={MDXComponents} />
-    </article>
+    <>
+      <div className="mb-3 mt-12 flex items-baseline gap-x-2">
+        <DateTime
+          dateTime={blogPost.createdAt}
+          fontWeight="font-medium"
+          fontSize="text-base"
+        />
+        <P additionalClasses="font-semibold text-base text-color-subtle">|</P>
+        <ReadTime text="3 mins" fontWeight="font-medium" fontSize="text-base" />
+      </div>
+
+      <article>
+        <Component components={MDXComponents} />
+      </article>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
+import { ENV } from "env";
 import { prisma } from "~/.server/db";
 import {
   Avatar,
@@ -7,8 +8,8 @@ import {
   DateTime,
   Footer,
   H2,
-  H3,
   H4,
+  H5,
   Header,
   HR,
   NoBlogPosts,
@@ -73,7 +74,7 @@ export default function IndexRoute() {
       </section>
 
       <main className="col-start-2 flex-grow">
-        <H3 additionalClasses="mt-12">Featured Posts</H3>
+        <H4 additionalClasses="mt-12">Featured Posts</H4>
         <HR additionalClasses="mt-1" />
         <div className="mb-12 mt-12 pb-12">
           {featuredBlogPosts.length > 0 ? (
@@ -94,10 +95,10 @@ export default function IndexRoute() {
                   prefetch="intent"
                   className="group relative"
                 >
-                  <H4 additionalClasses="mt-2 group-hover:text-color-hover">
+                  <H5 additionalClasses="mt-3 group-hover:text-color-hover">
                     {post.title}
-                  </H4>
-                  <Small additionalClasses="group-hover:text-color-hover mt-1 max-w-xl">
+                  </H5>
+                  <Small additionalClasses="group-hover:text-color-hover text-color-muted mt-1 max-w-xl">
                     {post.description}
                   </Small>
                 </Link>
@@ -113,11 +114,48 @@ export default function IndexRoute() {
   );
 }
 
-export const meta: MetaFunction = () => [
-  { title: "Matt Millard" },
-  {
-    name: "description",
-    content:
-      "I'm Matt. Welcome to my portfolio and blog, where I share web development guides, technical insights, and projects.",
-  },
-];
+export const meta: MetaFunction = ({ location }) => {
+  const title = "Blog";
+  const siteName = "Matt Millard";
+  const author = "Matt Millard";
+  const description =
+    "I'm Matt. Welcome to my portfolio and blog, where I share web development guides, technical insights, and projects.";
+  const imageUrl =
+    "https://res.cloudinary.com/hospohub/image/upload/v1736445320/matt_millard_headshot_1x1_2048px_larger_r1f5tn.jpg";
+  const altText = "Matt Millard";
+
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? ENV.BASE_URL
+      : "http://localhost:3000";
+  const url = `${baseUrl}${location.pathname}`;
+
+  return [
+    // Basic Metadata
+    { title: siteName },
+    {
+      name: "description",
+      content: description,
+    },
+    { name: "author", content: author },
+
+    // X (Twitter) Card Metadata
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:site", content: "@_MattMillard" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: imageUrl },
+    { name: "twitter:image:alt", content: altText },
+
+    // Open Graph Metadata
+    { name: "og:title", content: title },
+    { name: "og:type", content: "website" },
+    { name: "og:url", content: url },
+    { name: "og:site_name", content: siteName },
+    { name: "og:image", content: imageUrl },
+    { name: "og:image:alt", content: altText },
+    { name: "og:image:type", content: "image/jpeg" },
+    { name: "og:image:width", content: "400" },
+    { name: "og:image:height", content: "300" },
+  ];
+};

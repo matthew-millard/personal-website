@@ -86,7 +86,16 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   const { code, frontmatter } = result;
 
-  return { blogPost, code, frontmatter };
+  const lastModified = new Date(blogPost.updatedAt).toUTCString();
+
+  return new Response(JSON.stringify({ blogPost, code, frontmatter }), {
+    headers: {
+      "Cache-Control": "public, max-age=3600, stale-while-revalidate=60", // one hour
+      "Content-Type": "application/json",
+      "Last-Modified": lastModified,
+    },
+    status: 200,
+  });
 }
 
 export default function BlogPostRoute() {
@@ -109,8 +118,6 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
   const author = "Matt Millard";
   const siteName = "Matt Millard";
 
-  console.log(location.pathname);
-
   const baseUrl =
     process.env.NODE_ENV === "production"
       ? ENV.BASE_URL
@@ -129,8 +136,9 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
     { name: "description", content: description },
     { name: "author", content: author },
 
-    // Twitter Card Metadata
+    // X (Twitter) Card Metadata
     { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:site", content: "@_MattMillard" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: imageUrl },

@@ -71,7 +71,10 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
   const author = "Matt Millard";
   const siteName = "Matt Millard";
 
-  const baseUrl = ENV.BASE_URL || "http://localhost:3000";
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? ENV.BASE_URL
+      : "http://localhost:3000";
   const url = `${baseUrl}${location.pathname}`;
 
   const imageUrl = data?.blogPost.imageUrl;
@@ -88,6 +91,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
 
     // Twitter Card Metadata
     { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:site", content: "@_MattMillard" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: imageUrl },

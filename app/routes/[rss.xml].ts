@@ -22,34 +22,35 @@ export async function loader() {
   });
 
   const rssFeed = `
-  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
         <title>${author} blog</title>
         <description>${description}</description>
         <link>${baseUrl}/</link>
-        ${blogPosts
-          .map((post) => {
-            return `
-            <item>
-                <title>${post.title}</title>
-                <link>${baseUrl}/blog/${post.slug}/</link>
-                <guid isPermaLink='true'>${baseUrl}/blog/${post.slug}/</guid>
-                <description>${post.description}</description>
-                <pubDate>${new Date(post.createdAt).toUTCString()}</pubDate>
-                <author>${author}</author>
-            </item>
-            `;
-          })
-          .join("\n")}
-    </channel>
-  </rss>
+    ${blogPosts
+      .map((post) => {
+        return `
+        <item>
+            <title>${post.title}</title>
+            <link>${baseUrl}/blog/${post.slug}/</link>
+            <guid isPermaLink='true'>${baseUrl}/blog/${post.slug}/</guid>
+            <description>${post.description}</description>
+            <pubDate>${new Date(post.createdAt).toUTCString()}</pubDate>
+            <author>Matthew.Richie.Millard@gmail.com (${author})</author>
+        </item>
+        `;
+      })
+      .join("\n")}
+      </channel>
+</rss>
   `.trim();
 
   try {
     return new Response(rssFeed, {
       headers: {
-        "Content-Type": "application/xml",
-        "Cache-Control": "public, max-age=86400", // Cache for a day
+        "Content-Type": "application/rss+xml",
+        "Cache-Control": "public, max-age=0, must-revalidate",
       },
       status: 200,
     });

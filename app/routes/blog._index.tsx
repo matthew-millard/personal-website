@@ -2,28 +2,45 @@ import { MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { ENV } from "env";
 import { prisma } from "~/.server/db";
-import { CategoryTag, DateTime, H2, H4, NoBlogPosts, P } from "~/components";
+import {
+  CategoryTag,
+  DateTime,
+  GenericErrorBoundary,
+  H2,
+  H4,
+  NoBlogPosts,
+  P,
+} from "~/components";
 import { formatCategoryToSlug } from "~/utils";
 
 export async function loader() {
-  const blogPosts = await prisma.blogPost.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    select: {
-      altText: true,
-      category: true,
-      createdAt: true,
-      description: true,
-      id: true,
-      imageUrl: true,
-      slug: true,
-      title: true,
-      updatedAt: true,
-    },
-  });
+  try {
+    const blogPosts = await prisma.blogPost.findMany({
+      orderBy: { createdAt: "desc" },
+      select: {
+        altText: true,
+        category: true,
+        createdAt: true,
+        description: true,
+        id: true,
+        imageUrl: true,
+        slug: true,
+        title: true,
+        updatedAt: true,
+      },
+    });
 
-  return { blogPosts };
+    return { blogPosts };
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    throw new Response(
+      "An error occurred while fetching blog posts. Please try again later.",
+      {
+        status: 500,
+        statusText: "Internal Server Error",
+      },
+    );
+  }
 }
 
 export default function BlogRoute() {
@@ -120,3 +137,7 @@ export const meta: MetaFunction = ({ location }) => {
     { name: "og:image:height", content: "300" },
   ];
 };
+
+export function ErrorBoundary() {
+  return <GenericErrorBoundary />;
+}

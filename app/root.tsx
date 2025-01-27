@@ -89,7 +89,9 @@ export default function AppWithProviders() {
 export function ErrorBoundary() {
   return (
     <Document>
-      <GenericErrorBoundary />
+      <div className="mx-auto flex min-h-dvh max-w-4xl flex-col items-center justify-center px-6">
+        <GenericErrorBoundary showRedirect={true} />
+      </div>
     </Document>
   );
 }

@@ -39,6 +39,7 @@ export default function Header() {
               key={item.name}
               to={item.href}
               className="text-sm text-link hover:text-link-hover"
+              prefetch="intent"
             >
               {item.name}
             </NavLink>

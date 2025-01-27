@@ -1,4 +1,6 @@
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { isRouteErrorResponse, Link, useRouteError } from "@remix-run/react";
+import { H1, H2, P } from "~/components";
 
 interface ErrorLayoutProps {
   status?: number;
@@ -26,21 +28,21 @@ export default function GenericErrorBoundary() {
 
 function ErrorLayout({ status, title, message }: ErrorLayoutProps) {
   return (
-    <main className="text-color grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
-      <div className="text-center">
-        <p className="text-2xl font-semibold">{status ? status : null}</p>
-        <h1 className="mt-4 text-4xl font-semibold">
-          {title ? title : "Unknown Error"}
-        </h1>
-        <p className="mt-6 text-lg leading-7">
-          {message ? message : "Sorry, an unexpected error has occured."}
-        </p>
-        <div className="mt-10 flex items-center justify-center gap-x-6">
-          <Link to="/" prefetch="intent">
-            <span>← Go back home</span>
-          </Link>
-        </div>
-      </div>
+    <main className="flex min-h-dvh flex-col items-center justify-center space-y-8">
+      <H1 additionalClasses="tracking-wide">{status ? status : null}</H1>
+      <H2>{title ? title : "Unknown Error"}</H2>
+      <P additionalClasses="text-color-muted">
+        {message ? message : "Sorry, an unexpected error has occured."}
+      </P>
+
+      <Link
+        to="/"
+        prefetch="intent"
+        className="flex items-center gap-x-2 rounded-sm border border-edge-muted px-3 py-2 text-base font-medium leading-relaxed text-color-muted shadow-sm hover:border-edge hover:text-color"
+      >
+        <ArrowLeftIcon className="h-5 w-5" />
+        Home
+      </Link>
     </main>
   );
 }

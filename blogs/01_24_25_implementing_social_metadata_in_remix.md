@@ -1,5 +1,7 @@
 # Implementing Social Metadata in Remix
 
+![Remix Logo](https://res.cloudinary.com/hospohub/image/upload/v1737929608/remix-glowing_eo2jja.png)
+
 It's nice when you share links on social media platforms such as Facebook, Instagram, and X. These links are presented in neatly formatted cards displaying an image, title, summary, and link. This is made possible by adding certain `<meta>` tags in the `<head>` of the HTML document.
 
 There are two main standards that determine how to format this metadata [X (Twitter) Cards](https://developer.x.com/en/docs/x-for-websites/cards/overview/abouts-cards), and the [Open Graph protocol](https://ogp.me/). Let's start with adding dynamic X Cards to our blog pages using the [meta function](https://remix.run/docs/en/main/route/meta) in Remix.

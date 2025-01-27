@@ -2,7 +2,7 @@ import { MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { ENV } from "env";
 import { prisma } from "~/.server/db";
-import { CategoryTag, DateTime, H2, H4, P } from "~/components";
+import { CategoryTag, DateTime, H2, H4, NoBlogPosts, P } from "~/components";
 import { formatCategoryToSlug } from "~/utils";
 
 export async function loader() {
@@ -33,39 +33,43 @@ export default function BlogRoute() {
       <section>
         <H2>Blog posts</H2>
       </section>
-      <section className="my-12 space-y-16">
-        {blogPosts.map((post) => (
-          <Link
-            key={post.id}
-            to={`/blog/${post.slug}`}
-            aria-label={`Read more about ${post.title}`}
-            prefetch="intent"
-            className="group relative isolate flex flex-col gap-8 rounded-md border border-edge-muted-extra bg-backdrop p-6 transition-colors duration-200 hover:bg-backdrop-muted md:flex-row md:justify-between md:p-10"
-          >
-            <div>
-              <div className="flex items-center gap-x-4 text-xs">
-                <DateTime dateTime={post.createdAt} />
-                <CategoryTag
-                  href={`/blog/category/${formatCategoryToSlug(post.category)}`}
-                  title={post.category}
+      <section className="my-12 space-y-10">
+        {blogPosts.length > 0 ? (
+          blogPosts.map((post) => (
+            <Link
+              key={post.id}
+              to={`/blog/${post.slug}`}
+              aria-label={`Read more about ${post.title}`}
+              prefetch="intent"
+              className="group relative isolate flex flex-col gap-8 rounded-md border border-edge-muted-extra bg-backdrop p-6 transition-colors duration-200 hover:bg-backdrop-muted md:flex-row md:justify-between md:p-10"
+            >
+              <div>
+                <div className="flex items-center gap-x-4 text-xs">
+                  <DateTime dateTime={post.createdAt} />
+                  <CategoryTag
+                    href={`/blog/category/${formatCategoryToSlug(post.category)}`}
+                    title={post.category}
+                  />
+                </div>
+                <div className="group relative max-w-xl">
+                  <H4 additionalClasses="mt-3">{post.title}</H4>
+                  <P additionalClasses="mt-5 text-color-muted">
+                    {post.description}
+                  </P>
+                </div>
+              </div>
+              <div className="relative aspect-video overflow-hidden rounded-md sm:aspect-[2/1] md:aspect-square md:w-60 md:shrink-0">
+                <img
+                  alt={post.altText}
+                  src={post.imageUrl}
+                  className="absolute inset-0 size-full object-scale-down"
                 />
               </div>
-              <div className="group relative max-w-xl">
-                <H4 additionalClasses="mt-3">{post.title}</H4>
-                <P additionalClasses="mt-5 text-color-muted">
-                  {post.description}
-                </P>
-              </div>
-            </div>
-            <div className="relative aspect-video overflow-hidden rounded-md sm:aspect-[2/1] md:aspect-square md:w-60 md:shrink-0">
-              <img
-                alt={post.altText}
-                src={post.imageUrl}
-                className="absolute inset-0 size-full object-cover"
-              />
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))
+        ) : (
+          <NoBlogPosts />
+        )}
       </section>
     </div>
   );

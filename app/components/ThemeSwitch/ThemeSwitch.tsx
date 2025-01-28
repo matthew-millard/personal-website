@@ -1,7 +1,6 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useFetcher } from "@remix-run/react";
 import { z } from "zod";
-import { Tooltip } from "~/components";
 import { useTheme } from "~/hooks";
 
 export type Theme = "light" | "dark";
@@ -17,7 +16,6 @@ export default function ThemeSwitch() {
   const userPreference = useTheme();
   const mode = userPreference ?? "light";
   const nextMode = mode === "light" ? "dark" : "light";
-  const tooltipId = "theme-switch";
 
   return (
     <fetcher.Form method="POST" action="/">
@@ -26,11 +24,7 @@ export default function ThemeSwitch() {
         type="submit"
         name="intent"
         value={updateThemeActionIntent}
-        className="text-icon-muted flex items-center"
-        data-tooltip-id={tooltipId}
-        data-tooltip-content={
-          mode === "light" ? "Switch theme to dark" : "Switch theme to light"
-        }
+        className="flex items-center text-icon-muted"
       >
         {mode === "light" ? (
           <>
@@ -44,7 +38,6 @@ export default function ThemeSwitch() {
           </>
         )}
       </button>
-      <Tooltip id={tooltipId} />
     </fetcher.Form>
   );
 }

@@ -78,22 +78,23 @@
     --zinc-950: #09090b;
 
     /* Primary */
-    --teal-50: #f0fdfa;
-    --teal-100: #ccfbf1;
-    --teal-200: #99f6e4;
-    --teal-300: #5eead4;
-    --teal-400: #2dd4bf;
-    --teal-500: #14b8a6;
-    --teal-600: #0d9488;
-    --teal-700: #0f766e;
-    --teal-800: #115e59;
-    --teal-900: #134e4a;
-    --teal-950: #042f2e;
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-300: #93c5fd;
+    --blue-400: #60a5fa;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --blue-900: #1e3a8a;
+    --blue-950: #172554;
 
     /* Error */
     --red-600: #dc2626;
 
-    --primary-color: var(--teal-600);
+    --primary-color: var(--blue-500);
+    --primary-color-hover: var(--blue-400);
     --backdrop-color: var(--zinc-100);
     --backdrop-color-muted: var(--zinc-200);
     --backdrop-color-strong: var(--zinc-50);

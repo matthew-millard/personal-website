@@ -34,7 +34,7 @@ import Header from "./Header";
 import Label from "./Label";
 import Logo from "./Logo";
 import Options from "./Options";
-import RSSFeed from "./RSSFeed";
+import RssFeed from "./RssFeed";
 import Select from "./Select";
 
 import Socials from "./Socials";
@@ -48,7 +48,7 @@ export {
   Header,
   Logo,
   ThemeSwitch,
-  RSSFeed,
+  RssFeed,
   Tooltip,
   Socials,
   CategoryTag,

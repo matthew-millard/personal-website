@@ -1,5 +1,43 @@
+import { BlogPost } from "@prisma/client";
 import { ENV } from "env";
 import { prisma } from "~/.server/db";
+
+export interface GenerateRss {
+  baseUrl: string;
+  title: string;
+  link: string;
+  description: string;
+  pubDate: BlogPost["createdAt"];
+  author?: string;
+  guid?: string;
+}
+
+const escapeXML = (str: string) =>
+  str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+
+export function generateRss({
+  baseUrl,
+  title,
+  link,
+  description,
+  pubDate,
+  author,
+}: GenerateRss) {
+  return `<item>
+              <title>${title}</title>
+              <link>${baseUrl}/blog/${link}/</link>
+              <guid isPermaLink='true'>${baseUrl}/blog/${link}/</guid>
+              <description>${escapeXML(description)}</description>
+              <pubDate>${new Date(pubDate).toUTCString()}</pubDate>
+              <author>Matthew.Richie.Millard@gmail.com (${author})</author>
+          </item>
+          `;
+}
 
 export async function loader() {
   const author = "Matt Millard";
@@ -9,7 +47,7 @@ export async function loader() {
       ? ENV.BASE_URL
       : "http://localhost:3000";
 
-  const blogPosts = await prisma.blogPost.findMany({
+  const pages = await prisma.blogPost.findMany({
     select: {
       title: true,
       slug: true,
@@ -21,38 +59,37 @@ export async function loader() {
     },
   });
 
-  const rssFeed = `
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-<atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
-        <title>${author} blog</title>
-        <description>${description}</description>
-        <link>${baseUrl}/</link>
-    ${blogPosts
-      .map((post) => {
-        return `
-        <item>
-            <title>${post.title}</title>
-            <link>${baseUrl}/blog/${post.slug}/</link>
-            <guid isPermaLink='true'>${baseUrl}/blog/${post.slug}/</guid>
-            <description>${post.description}</description>
-            <pubDate>${new Date(post.createdAt).toUTCString()}</pubDate>
-            <author>Matthew.Richie.Millard@gmail.com (${author})</author>
-        </item>
-        `;
-      })
-      .join("\n")}
-      </channel>
-</rss>
-  `.trim();
+  const feed = `
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
+          <title>${author} blog</title>
+          <description>${description}</description>
+          <link>${baseUrl}/</link>
+          <language>en-CA</language>
+          <copyright>Copyright © ${new Date().getFullYear()} ${author}</copyright>
+          ${pages
+            .map((page) => {
+              return generateRss({
+                baseUrl,
+                title: page.title,
+                description: page.description,
+                pubDate: page.createdAt,
+                link: page.slug,
+                author,
+              });
+            })
+            .join("")}
+    </channel>
+  </rss>
+`;
 
   try {
-    return new Response(rssFeed, {
+    return new Response(feed, {
       headers: {
-        "Content-Type": "application/rss+xml",
-        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Content-Type": "application/xml",
+        "Cache-Control": "public, max-age=2419200", // 4 weeks
       },
-      status: 200,
     });
   } catch (error) {
     console.error("Error generating rss feed:", error);

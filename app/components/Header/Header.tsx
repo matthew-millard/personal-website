@@ -2,7 +2,7 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "@remix-run/react";
 import { useState } from "react";
-import { AdminIcon, Logo, RSSFeed, ThemeSwitch } from "~/components";
+import { AdminIcon, Logo, RssFeed, ThemeSwitch } from "~/components";
 import { useIsAdmin } from "~/hooks";
 
 const navigation = [
@@ -48,7 +48,7 @@ export default function Header() {
         <div className="hidden gap-x-3 lg:flex lg:flex-1 lg:justify-end">
           {isAdmin ? <AdminIcon /> : null}
           <ThemeSwitch />
-          <RSSFeed />
+          <RssFeed />
         </div>
       </nav>
 
@@ -86,7 +86,7 @@ export default function Header() {
               </div>
               <div className="flex gap-x-3 py-6">
                 <ThemeSwitch />
-                <RSSFeed />
+                <RssFeed />
                 {isAdmin ? <AdminIcon /> : null}
               </div>
             </div>

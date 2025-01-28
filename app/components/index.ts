@@ -26,6 +26,7 @@ import {
   Highlight,
 } from "./Blog";
 import CodeBlock from "./CodeBlock";
+import DownloadCV from "./DownloadCV";
 import { GenericErrorBoundary } from "./ErrorBoundary";
 import FieldError from "./FieldError";
 import Footer from "./Footer";
@@ -36,7 +37,6 @@ import Logo from "./Logo";
 import Options from "./Options";
 import RssFeed from "./RssFeed";
 import Select from "./Select";
-
 import Socials from "./Socials";
 import SubmitButton from "./SubmitButton";
 import TextAreaInput from "./TextAreaInput";
@@ -87,4 +87,5 @@ export {
   Strong,
   Small,
   Highlight,
+  DownloadCV,
 };

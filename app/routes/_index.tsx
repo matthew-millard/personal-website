@@ -6,6 +6,7 @@ import {
   Avatar,
   CategoryTag,
   DateTime,
+  DownloadCV,
   Footer,
   H2,
   H4,
@@ -52,13 +53,14 @@ export default function IndexRoute() {
             <H2 additionalClasses="pl-4 text-2xl">
               Matt Millard<span className="ml-3">👋</span>
             </H2>
-            <P additionalClasses="mt-3 max-w-md">
+            <P additionalClasses="mt-3 max-w-md md:max-w-none">
               A passionate web developer sharing guides, technical insights, and
               projects. Welcome to my portfolio and blog! <Avatar />
               <span className="ml-1">💻</span>
             </P>
-            <div className="mt-8">
+            <div className="mt-8 flex items-center justify-between">
               <Socials width={24} height={24} />
+              <DownloadCV />
             </div>
           </div>
         </div>

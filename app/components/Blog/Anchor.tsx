@@ -15,7 +15,7 @@ export default function Anchor({
       target="_blank"
       rel="noopener noreferrer"
       className={clsx(
-        "text-blue-500 underline underline-offset-2 hover:text-blue-400",
+        "hover:text-primary-hover text-primary underline underline-offset-2",
         additionalClasses,
       )}
     >

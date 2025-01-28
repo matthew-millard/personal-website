@@ -4,6 +4,7 @@ import { NavLink } from "@remix-run/react";
 import { useState } from "react";
 import { AdminIcon, Logo, RssFeed, ThemeSwitch } from "~/components";
 import { useIsAdmin } from "~/hooks";
+import { classNames } from "~/utils";
 
 const navigation = [
   { name: "Blog", href: "/blog" },
@@ -15,11 +16,8 @@ export default function Header() {
   const isAdmin = useIsAdmin();
 
   return (
-    <header className="sticky -top-px z-20 bg-backdrop">
-      <nav
-        aria-label="Global"
-        className="flex items-center border-b border-b-edge py-4 lg:mx-auto"
-      >
+    <header className="sticky -top-px z-30 border-b border-edge-muted-extra bg-backdrop">
+      <nav aria-label="Global" className="flex items-center py-4 lg:mx-auto">
         <div className="flex flex-1 lg:mr-24 lg:flex-none">
           <Logo />
         </div>
@@ -38,7 +36,14 @@ export default function Header() {
             <NavLink
               key={item.name}
               to={item.href}
-              className="text-sm text-link hover:text-link-hover"
+              className={({ isActive }) => {
+                return classNames(
+                  "text-sm text-link hover:text-link-hover",
+                  isActive
+                    ? "hover:decoration-primary-hover underline decoration-primary decoration-2 underline-offset-4"
+                    : "",
+                );
+              }}
               prefetch="intent"
             >
               {item.name}

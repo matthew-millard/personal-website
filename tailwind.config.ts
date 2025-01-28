@@ -7,6 +7,7 @@ export default {
       colors: {
         primary: {
           DEFAULT: "var(--primary-color)",
+          hover: "var(--primary-color-hover)",
         },
         backdrop: {
           DEFAULT: "var(--backdrop-color)",

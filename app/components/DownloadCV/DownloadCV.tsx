@@ -3,7 +3,7 @@ export default function DownloadCV() {
     <a
       download
       href="/download-cv"
-      className="group flex items-center justify-center gap-x-1 px-3 py-2 text-sm font-medium tracking-wide text-blue-500 transition hover:text-blue-400 md:justify-end"
+      className="hover:text-primary-hover group flex items-center justify-center gap-x-1 px-3 py-2 text-sm font-medium tracking-wide text-primary transition md:justify-end"
     >
       Download CV{" "}
       <svg

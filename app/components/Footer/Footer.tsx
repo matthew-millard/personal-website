@@ -10,7 +10,7 @@ export default function Footer() {
         </Small>
         <Anchor
           href="https://github.com/matthew-millard/personal-website"
-          additionalClasses="text-xs font-light"
+          additionalClasses="text-xs"
         >
           View Source code
         </Anchor>

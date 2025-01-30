@@ -31,7 +31,9 @@ export default function Header() {
         <div className="flex flex-1 lg:mr-24 lg:flex-none">
           <Logo />
         </div>
-        <div className="flex lg:hidden">
+
+        <div className="flex gap-x-4 lg:hidden">
+          <SearchToggle setSearchOpen={setSearchOpen} searchOpen={searchOpen} />
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}

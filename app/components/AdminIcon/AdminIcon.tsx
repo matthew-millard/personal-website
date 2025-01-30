@@ -4,7 +4,7 @@ import { Link } from "@remix-run/react";
 export default function AdminIcon() {
   return (
     <Link to="/admin">
-      <WrenchScrewdriverIcon className="h-5 w-5 text-icon-muted" />
+      <WrenchScrewdriverIcon className="size-5 text-icon-muted hover:text-icon-hover" />
     </Link>
   );
 }

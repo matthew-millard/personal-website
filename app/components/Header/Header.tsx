@@ -1,9 +1,16 @@
-import { Dialog, DialogPanel } from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "@remix-run/react";
 import { useState } from "react";
-import { AdminIcon, Logo, RssFeed, ThemeSwitch } from "~/components";
-import { useIsAdmin } from "~/hooks";
+import {
+  AdminIcon,
+  Logo,
+  RssFeed,
+  SearchBar,
+  SearchToggle,
+  ThemeSwitch,
+} from "~/components";
+import { useCommandK, useIsAdmin } from "~/hooks";
 import { classNames } from "~/utils";
 
 const navigation = [
@@ -13,7 +20,10 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
   const isAdmin = useIsAdmin();
+  useCommandK(setSearchOpen);
 
   return (
     <header className="sticky -top-px z-30 border-b border-edge-muted-extra bg-backdrop">
@@ -50,7 +60,8 @@ export default function Header() {
             </NavLink>
           ))}
         </div>
-        <div className="hidden gap-x-3 lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden items-center gap-x-3 lg:flex lg:flex-1 lg:justify-end">
+          <SearchToggle setSearchOpen={setSearchOpen} searchOpen={searchOpen} />
           {isAdmin ? <AdminIcon /> : null}
           <ThemeSwitch />
           <RssFeed />
@@ -97,6 +108,26 @@ export default function Header() {
             </div>
           </div>
         </DialogPanel>
+      </Dialog>
+
+      {/* Search Dialog */}
+      <Dialog
+        open={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        className="relative z-50"
+      >
+        <DialogBackdrop
+          transition
+          className="fixed inset-0 bg-zinc-950/90 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+        />
+        <div className="fixed inset-0 w-screen overflow-y-auto p-4 sm:p-6 md:p-20">
+          <DialogPanel
+            transition
+            className="mx-auto max-w-xl rounded-md border border-edge-muted-extra bg-backdrop-muted shadow-2xl transition-all data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+          >
+            <SearchBar />
+          </DialogPanel>
+        </div>
       </Dialog>
     </header>
   );

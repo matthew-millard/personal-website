@@ -1,6 +1,6 @@
 import { prisma } from "./db";
 import { redirect } from "@remix-run/node";
-import { getSession } from "./session";
+import { getSession, sessionStorage } from "./session";
 import { sessionKey } from "./config";
 import type { Password, Admin } from "@prisma/client";
 import bcrypt from "bcryptjs";

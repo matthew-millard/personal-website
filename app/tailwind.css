@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .no-cancel {
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+}
+
 @layer base {
   /* Light */
   @font-face {

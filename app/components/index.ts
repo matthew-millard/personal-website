@@ -36,6 +36,7 @@ import Header from "./Header";
 import Label from "./Label";
 import Logo from "./Logo";
 import Options from "./Options";
+import PendingIndicator from "./PendingIndicator";
 import RssFeed from "./RssFeed";
 import Select from "./Select";
 import Socials from "./Socials";
@@ -91,4 +92,5 @@ export {
   DownloadCV,
   SearchBar,
   SearchToggle,
+  PendingIndicator,
 };

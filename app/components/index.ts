@@ -1,3 +1,4 @@
+import { SearchToggle, SearchBar } from "~/components/SearchBar";
 import AdminIcon from "./AdminIcon";
 import Avatar from "./Avatar";
 import {
@@ -88,4 +89,6 @@ export {
   Small,
   Highlight,
   DownloadCV,
+  SearchBar,
+  SearchToggle,
 };

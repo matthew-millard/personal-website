@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useFetcher } from "@remix-run/react";
 import { useRef, useState } from "react";
-import { H3, P, PendingIndicator } from "~/components";
+import { H5, P, PendingIndicator } from "~/components";
 import { useDebounce } from "~/hooks";
 import type { SearchResults } from "~/routes/search";
 
@@ -12,6 +12,8 @@ export default function SearchBar() {
 
   const isSearching = search.state !== "idle";
   const debouncedIsSearching = useDebounce(isSearching, 200);
+
+  const debouncedQuery = useDebounce(query, 300);
 
   // Only show results if query is NOT empty
   const searchResults =
@@ -37,7 +39,7 @@ export default function SearchBar() {
           search.submit(event.currentTarget.form); // Note to self: consider using debounce
         }}
         type="search"
-        placeholder="Search..."
+        placeholder="Search blog posts..."
         className="no-cancel col-start-1 row-start-1 h-12 w-full bg-transparent pl-10 pr-12 text-base text-color sm:text-sm"
         data-autofocus
         ref={inputRef}
@@ -63,18 +65,27 @@ export default function SearchBar() {
           <XMarkIcon aria-hidden="true" className="size-5" />
         </button>
       ) : null}
-      <ul>
-        {searchResults.length > 0
-          ? searchResults.map((blog) => (
-              <li key={blog.id}>
-                <Link to={`/blog/${blog.slug}`} prefetch="intent">
-                  <H3>{blog.title}</H3>
-                  <P>{blog.description}</P>
-                </Link>
-              </li>
-            ))
-          : query && <P>No results found</P>}
-      </ul>
+      {searchResults.length > 0 ? (
+        <ul className="max-h-96 scroll-py-3 divide-y divide-edge-muted-extra overflow-y-auto border-t border-t-edge-muted-extra">
+          {searchResults.map((blog) => (
+            <li
+              key={blog.id}
+              className="px-10 py-5 text-icon-muted transition-colors duration-100 hover:bg-zinc-500/50 hover:text-color"
+            >
+              <Link to={`/blog/${blog.slug}`} prefetch="intent">
+                <H5>{blog.title}</H5>
+                <P>{blog.description}</P>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        debouncedQuery && (
+          <P additionalClasses="p-3 border-t border-t-edge-muted-extra">
+            No results found
+          </P>
+        )
+      )}
     </search.Form>
   );
 }

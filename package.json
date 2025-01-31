@@ -1,5 +1,5 @@
 {
-  "name": "personal-website-572a",
+  "name": "mattmillard",
   "private": true,
   "sideEffects": false,
   "scripts": {
@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
+    "@flydotio/dockerfile": "^0.7.4",
     "@remix-run/dev": "^2.15.2",
     "@testing-library/cypress": "^10.0.2",
     "@testing-library/jest-dom": "^6.5.0",

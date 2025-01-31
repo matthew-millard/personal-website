@@ -100,8 +100,8 @@ async function run() {
 
   app.all("*", remixHandler);
 
-  const port = process.env.PORT || 3000;
-  app.listen(port, () => {
+  const port = Number(process.env.PORT) || 3000;
+  app.listen(port, "0.0.0.0", () => {
     console.log(`✅ app ready: http://localhost:${port}`);
 
     if (process.env.NODE_ENV === "development") {

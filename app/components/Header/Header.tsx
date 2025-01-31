@@ -8,6 +8,7 @@ import {
   RssFeed,
   SearchBar,
   SearchToggle,
+  SearchToggleWithContainer,
   ThemeSwitch,
 } from "~/components";
 import { useCommandK, useIsAdmin } from "~/hooks";
@@ -34,6 +35,7 @@ export default function Header() {
 
         <div className="flex gap-x-4 lg:hidden">
           <SearchToggle setSearchOpen={setSearchOpen} searchOpen={searchOpen} />
+
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
@@ -63,7 +65,11 @@ export default function Header() {
           ))}
         </div>
         <div className="hidden items-center gap-x-3 lg:flex lg:flex-1 lg:justify-end">
-          <SearchToggle setSearchOpen={setSearchOpen} searchOpen={searchOpen} />
+          {/* <SearchToggle setSearchOpen={setSearchOpen} searchOpen={searchOpen} /> */}
+          <SearchToggleWithContainer
+            setSearchOpen={setSearchOpen}
+            searchOpen={searchOpen}
+          />
           {isAdmin ? <AdminIcon /> : null}
           <ThemeSwitch />
           <RssFeed />

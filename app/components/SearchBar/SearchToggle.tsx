@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import type { Dispatch, SetStateAction } from "react";
 
-interface SearchToggleProps {
+export interface SearchToggleProps {
   searchOpen: boolean;
   setSearchOpen: Dispatch<SetStateAction<boolean>>;
 }

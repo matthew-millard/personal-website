@@ -1,4 +1,8 @@
-import { SearchToggle, SearchBar } from "~/components/SearchBar";
+import {
+  SearchToggle,
+  SearchBar,
+  SearchToggleWithContainer,
+} from "~/components/SearchBar";
 import AdminIcon from "./AdminIcon";
 import Avatar from "./Avatar";
 import {
@@ -92,5 +96,6 @@ export {
   DownloadCV,
   SearchBar,
   SearchToggle,
+  SearchToggleWithContainer,
   PendingIndicator,
 };

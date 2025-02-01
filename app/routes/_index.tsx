@@ -1,6 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { ENV } from "env";
 import { prisma } from "~/.server/db";
 import {
   Avatar,
@@ -18,6 +17,7 @@ import {
   Small,
   Socials,
 } from "~/components";
+import { ENV } from "~/env";
 import { formatCategoryToSlug } from "~/utils";
 
 export async function loader() {
@@ -131,6 +131,8 @@ export const meta: MetaFunction = ({ location }) => {
       ? ENV.BASE_URL
       : "http://localhost:3000";
   const url = `${baseUrl}${location.pathname}`;
+
+  console.log("url", url);
 
   return [
     // Basic Metadata

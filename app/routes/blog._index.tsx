@@ -1,6 +1,5 @@
 import { MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { ENV } from "env";
 import { prisma } from "~/.server/db";
 import {
   CategoryTag,
@@ -11,6 +10,7 @@ import {
   NoBlogPosts,
   P,
 } from "~/components";
+import { ENV } from "~/env";
 import { formatCategoryToSlug } from "~/utils";
 
 export async function loader() {

@@ -1,6 +1,6 @@
 import { MetaFunction } from "@remix-run/node";
-import { ENV } from "env";
 import { GenericErrorBoundary, H2, H3, H5, HR, P } from "~/components";
+import { ENV } from "~/env";
 
 export default function AboutRoute() {
   return (

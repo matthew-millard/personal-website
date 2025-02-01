@@ -1,6 +1,6 @@
 import { createCookieSessionStorage } from "@remix-run/node";
 import { cookiePrefix } from "./config";
-import { ENV } from "../../env";
+import { ENV } from "~/env";
 
 const sessionSecret = ENV.SESSION_SECRET;
 

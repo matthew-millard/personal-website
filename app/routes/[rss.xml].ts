@@ -1,6 +1,6 @@
 import { BlogPost } from "@prisma/client";
-import { ENV } from "env";
 import { prisma } from "~/.server/db";
+import { ENV } from "~/env";
 
 export interface GenerateRss {
   baseUrl: string;

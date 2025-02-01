@@ -1,4 +1,4 @@
-import { ENV } from "env";
+import { ENV } from "~/env";
 
 export async function loader() {
   const baseUrl = ENV.BASE_URL;

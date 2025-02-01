@@ -2,7 +2,6 @@ import { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
 import React, { useMemo } from "react";
-import { ENV } from "env";
 import { prisma } from "~/.server/db";
 import { compileAndBundleMDX } from "~/.server/mdx.server";
 import {
@@ -25,6 +24,7 @@ import {
   DateTime,
   ReadTime,
 } from "~/components";
+import { ENV } from "~/env";
 
 const MDXComponents = {
   h1: (props: React.ComponentPropsWithoutRef<"h1">) => <H1 {...props} />,

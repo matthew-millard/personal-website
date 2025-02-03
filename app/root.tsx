@@ -64,6 +64,7 @@ function App() {
 
 function Document({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
+
   return (
     <html lang="en" className={`${theme} h-full font-sohne`}>
       <head>

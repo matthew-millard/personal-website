@@ -1,10 +1,9 @@
 import { prisma } from "~/.server/db";
-import { ENV } from "~/env";
 
 export async function loader() {
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? ENV.BASE_URL
+      ? process.env.BASE_URL
       : "http://localhost:3000";
 
   const staticPages = [

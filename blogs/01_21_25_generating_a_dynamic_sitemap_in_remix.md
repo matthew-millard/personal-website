@@ -2,15 +2,9 @@
 
 ![Code snippet of a Remix loader function generating a sitemap.](https://res.cloudinary.com/hospohub/image/upload/v1737593040/blog_generate_a_dynamic_sitemap_in_remix_vvf3hm.jpg)
 
-My first ever blog post. Let's go!
-
-I want to share how I generated a dynamic Sitemap for my new personal website. Why? Because I need one, and it’s something I’ve never done before.
-
----
-
 ## Why Do You Need a Sitemap?
 
-A **Sitemap** is a file that provides information about the pages, images, and other files on your website. It helps search engines like <mark>Google crawl your website more effectively</mark> and can improve your SEO. You can learn more about the protocol on the official [sitemaps.org website](https://www.sitemaps.org/protocol.html).
+A **Sitemap** is a file that provides information about the pages, images, and other files on your website. It helps search engines like Google crawl your website more effectively and can improve your SEO. You can learn more about the protocol on the official [sitemaps.org website](https://www.sitemaps.org/protocol.html).
 
 ---
 
@@ -110,7 +104,7 @@ export async function loader() {
   ];
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? "https://mattmillard.com"
+      ? process.env.BASE_URL
       : "http://localhost:3000";
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -145,11 +139,11 @@ export async function loader() {
 }
 ```
 
-**_If all the pages of your website is static, you could stop here._**
+Note: If all the pages of your website is static, you could stop here.
 
 ---
 
-### Step4: Add Dynamic Pages to Your Sitemap
+### Step 4: Add Dynamic Pages to Your Sitemap
 
 If your website includes dynamic pages, you'll want to include them in your Sitemap. Here’s how I added dynamic blog posts to my Sitemap using Prisma:
 
@@ -159,7 +153,7 @@ import { prisma } from "~/.server/db";
 export async function loader() {
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? "https://mattmillard.com"
+      ? process.env.BASE_URL
       : "http://localhost:3000";
 
   const staticPages = [
@@ -228,14 +222,44 @@ export async function loader() {
 
 ---
 
-### Step 5: Test Your Sitemap
+### Step 5: Deployment Considerations
 
-![XML Sitemap code snippet](https://res.cloudinary.com/hospohub/image/upload/v1737609561/blog_generate_a_dynamic_sitemap_in_remix_zzdlho.png "My XML Sitemap code snippet")
+When deploying your dynamic sitemap to production, it's important to manage environment variables correctly and ensure your sitemap reflects your live site.
 
-- Visit the Sitemap URL: `http://localhost:3000/sitemap.xml`.
+#### Managing Environment Variables
 
-- Also, if your site is live, try tools like [XML Sitemap Validator](https://www.xml-sitemaps.com/validate-xml-sitemap.html). They will inform you if there are any problems with your sitemap so you can make changes before you submit it to [Google Search Console](https://search.google.com/search-console/welcome?utm_source=wmx&utm_medium=deprecation-pane&utm_content=home)
+The loader function uses the following snippet to set the base URL:
 
----
+```tsx
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.BASE_URL
+    : "http://localhost:3000";
+```
 
-Thanks for reading my first ever blog post. I hope it has helped you out!
+- **Development vs. Production**:
+
+  In development, the fallback value `http://localhost:3000` is used. In production, make sure to set the `BASE_URL` environment variable to your live domain (e.g., `https://mattmillard.com`).
+
+- **Setting Environment Variables**:
+
+  - Local Development: Create a .env file in your project root and add:
+    `BASE_URL="https://mattmillard.com"`
+
+  **_Remember: Don't commit your `.env` file to version control_**
+
+  - **Production Deployments**: Use your hosting platform's environment variable management or secret storage. For example, if you're deploying to Fly.io, you can set the secret via the CLI:
+
+  `flyctl secrets set BASE_URL="https://mattmillard.com"`
+
+  ##### Additional Considerations
+
+  - Security:Environment variables are kept on the server, so sensitive data like BASE_URL won't be exposed to the client. Always ensure that any sensitive configuration is handled securely.
+
+  - Caching Strategy:
+    The sitemap loader sets a Cache-Control header `(public, max-age=86400)` to cache the sitemap for 24 hours. Depending on how frequently your site's content updates, you might need to adjust this value in production.
+
+  - Testing in Production:
+    After deploying, verify your sitemap by visiting `https://mattmillard.com/sitemap.xml` (or your corresponding live domain). Tools like the XML Sitemap Validator or Google Search Console can help ensure your sitemap is correctly formatted and accessible.
+
+    ![XML Sitemap code snippet](https://res.cloudinary.com/hospohub/image/upload/v1737609561/blog_generate_a_dynamic_sitemap_in_remix_zzdlho.png "My XML Sitemap code snippet")

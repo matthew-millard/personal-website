@@ -12,7 +12,7 @@ export default function SearchToggleWithContainer({
     <button
       type="button"
       onClick={() => setSearchOpen(!searchOpen)}
-      className="group flex w-60 items-center rounded-full border border-edge-muted-extra px-5 py-3 hover:border-edge-muted"
+      className="group flex w-40 items-center rounded-full border border-edge-muted-extra px-3 py-2"
     >
       <div className="flex flex-grow items-center">
         <span className="sr-only">
@@ -22,7 +22,7 @@ export default function SearchToggleWithContainer({
           className="size-5 text-icon-muted hover:text-icon-hover"
           aria-hidden="true"
         />
-        <Small additionalClasses="text-color-subtle ml-3">Search blog...</Small>
+        <Small additionalClasses="text-color-subtle ml-2">Search</Small>
       </div>
       <span className="leading-none text-color-subtle">
         <kbd className="font-sohne">⌘</kbd>

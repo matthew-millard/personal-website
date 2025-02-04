@@ -3,7 +3,7 @@ import { prisma } from "~/.server/db";
 export async function loader() {
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? "https://mattmillard.com"
+      ? process.env.BASE_URL
       : "http://localhost:3000";
 
   const staticPages = [

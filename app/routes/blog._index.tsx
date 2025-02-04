@@ -1,6 +1,5 @@
-import { MetaFunction } from "@remix-run/node";
+import { json, MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { ENV } from "env";
 import { prisma } from "~/.server/db";
 import {
   CategoryTag,
@@ -11,9 +10,14 @@ import {
   NoBlogPosts,
   P,
 } from "~/components";
+
 import { formatCategoryToSlug } from "~/utils";
 
 export async function loader() {
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.BASE_URL
+      : "http://localhost:3000";
   try {
     const blogPosts = await prisma.blogPost.findMany({
       orderBy: { createdAt: "desc" },
@@ -30,7 +34,14 @@ export async function loader() {
       },
     });
 
-    return { blogPosts };
+    // return new Response(JSON.stringify({ baseUrl, blogPosts }), {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   status: 200,
+    // });
+
+    return json({ baseUrl, blogPosts }); // json utility gives autocomplete
   } catch (error) {
     console.error("Error fetching blog posts:", error);
     throw new Response(
@@ -92,7 +103,7 @@ export default function BlogRoute() {
   );
 }
 
-export const meta: MetaFunction = ({ location }) => {
+export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
   const title = "Blog";
   const siteName = "Matt Millard";
   const author = "Matt Millard";
@@ -102,10 +113,7 @@ export const meta: MetaFunction = ({ location }) => {
     "https://res.cloudinary.com/hospohub/image/upload/v1736445320/matt_millard_headshot_1x1_2048px_larger_r1f5tn.jpg";
   const altText = "Matt Millard";
 
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? ENV.BASE_URL
-      : "http://localhost:3000";
+  const baseUrl = data?.baseUrl;
   const url = `${baseUrl}${location.pathname}`;
 
   return [

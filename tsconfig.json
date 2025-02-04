@@ -5,7 +5,8 @@
     "**/*.ts",
     "**/*.tsx",
     "app/.server/db.ts",
-    "app/.server/singleton.ts"
+    "app/.server/singleton.ts",
+    "app/env.ts"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2020"],

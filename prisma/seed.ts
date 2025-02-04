@@ -1,5 +1,5 @@
-import { ENV } from "env";
 import { prisma } from "~/.server/db";
+import { ENV } from "~/env";
 import { hashPassword } from "~/utils";
 
 async function seed(): Promise<void> {

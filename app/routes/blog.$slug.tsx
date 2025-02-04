@@ -2,7 +2,6 @@ import { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getMDXComponent } from "mdx-bundler/client";
 import React, { useMemo } from "react";
-import { ENV } from "env";
 import { prisma } from "~/.server/db";
 import { compileAndBundleMDX } from "~/.server/mdx.server";
 import {
@@ -67,6 +66,10 @@ const MDXComponents = {
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { slug } = params;
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.BASE_URL
+      : "http://localhost:3000";
   const blogPost = await prisma.blogPost.findFirst({
     where: {
       slug,
@@ -88,14 +91,17 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   const lastModified = new Date(blogPost.updatedAt).toUTCString();
 
-  return new Response(JSON.stringify({ blogPost, code, frontmatter }), {
-    headers: {
-      "Cache-Control": "public, max-age=3600, stale-while-revalidate=60", // one hour
-      "Content-Type": "application/json",
-      "Last-Modified": lastModified,
+  return new Response(
+    JSON.stringify({ blogPost, code, frontmatter, baseUrl }),
+    {
+      headers: {
+        "Cache-Control": "public, max-age=3600, stale-while-revalidate=60", // one hour
+        "Content-Type": "application/json",
+        "Last-Modified": lastModified,
+      },
+      status: 200,
     },
-    status: 200,
-  });
+  );
 }
 
 export default function BlogPostRoute() {
@@ -130,10 +136,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
   const author = "Matt Millard";
   const siteName = "Matt Millard";
 
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? ENV.BASE_URL
-      : "http://localhost:3000";
+  const baseUrl = data?.baseUrl;
   const url = `${baseUrl}${location.pathname}`;
 
   const imageUrl = data?.blogPost.imageUrl;

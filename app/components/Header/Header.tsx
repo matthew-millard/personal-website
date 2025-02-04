@@ -8,7 +8,7 @@ import {
   RssFeed,
   SearchBar,
   SearchToggle,
-  SearchToggleWithContainer,
+  // SearchToggleWithContainer,
   ThemeSwitch,
 } from "~/components";
 import { useCommandK, useIsAdmin } from "~/hooks";
@@ -54,7 +54,7 @@ export default function Header() {
                 return classNames(
                   "text-sm text-link hover:text-link-hover",
                   isActive
-                    ? "hover:decoration-primary-hover underline decoration-primary decoration-2 underline-offset-4"
+                    ? "underline decoration-primary decoration-2 underline-offset-4 hover:decoration-primary-hover"
                     : "",
                 );
               }}
@@ -65,11 +65,11 @@ export default function Header() {
           ))}
         </div>
         <div className="hidden items-center gap-x-3 lg:flex lg:flex-1 lg:justify-end">
-          {/* <SearchToggle setSearchOpen={setSearchOpen} searchOpen={searchOpen} /> */}
-          <SearchToggleWithContainer
+          <SearchToggle setSearchOpen={setSearchOpen} searchOpen={searchOpen} />
+          {/* <SearchToggleWithContainer
             setSearchOpen={setSearchOpen}
             searchOpen={searchOpen}
-          />
+          /> */}
           {isAdmin ? <AdminIcon /> : null}
           <ThemeSwitch />
           <RssFeed />

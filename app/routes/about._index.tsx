@@ -1,6 +1,18 @@
 import { MetaFunction } from "@remix-run/node";
-import { ENV } from "env";
 import { GenericErrorBoundary, H2, H3, H5, HR, P } from "~/components";
+
+export async function loader() {
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.BASE_URL
+      : "http://localhost:3000";
+  return new Response(JSON.stringify({ baseUrl }), {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    status: 200,
+  });
+}
 
 export default function AboutRoute() {
   return (
@@ -77,7 +89,7 @@ export default function AboutRoute() {
   );
 }
 
-export const meta: MetaFunction = ({ location }) => {
+export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
   const title = "About";
   const siteName = "Matt Millard";
   const author = "Matt Millard";
@@ -87,10 +99,7 @@ export const meta: MetaFunction = ({ location }) => {
     "https://res.cloudinary.com/hospohub/image/upload/v1736445320/matt_millard_headshot_1x1_2048px_larger_r1f5tn.jpg";
   const altText = "Matt Millard";
 
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? ENV.BASE_URL
-      : "http://localhost:3000";
+  const baseUrl = data?.baseUrl;
   const url = `${baseUrl}${location.pathname}`;
 
   return [

@@ -1,52 +1,51 @@
-# base node image
-FROM node:18-bullseye-slim as base
+# syntax = docker/dockerfile:1
 
-# set for base and all layer that inherit from it
-ENV NODE_ENV production
+# Adjust NODE_VERSION as desired
+ARG NODE_VERSION=21.2.0
+FROM node:${NODE_VERSION}-slim AS base
 
-# Install openssl for Prisma
-RUN apt-get update && apt-get install -y openssl
+LABEL fly_launch_runtime="Remix/Prisma"
 
-# Install all node_modules, including dev dependencies
-FROM base as deps
+# Remix/Prisma app lives here
+WORKDIR /app
 
-WORKDIR /myapp
+# Set production environment
+ENV NODE_ENV="production"
 
-ADD package.json package-lock.json .npmrc ./
-RUN npm install --include=dev
 
-# Setup production node_modules
-FROM base as production-deps
+# Throw-away build stage to reduce size of final image
+FROM base AS build
 
-WORKDIR /myapp
+# Install packages needed to build node modules
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential node-gyp openssl pkg-config python-is-python3
 
-COPY --from=deps /myapp/node_modules /myapp/node_modules
-ADD package.json package-lock.json .npmrc ./
-RUN npm prune --omit=dev
+# Install node modules
+COPY .npmrc package-lock.json package.json ./
+RUN npm ci --include=dev
 
-# Build the app
-FROM base as build
-
-WORKDIR /myapp
-
-COPY --from=deps /myapp/node_modules /myapp/node_modules
-
-ADD prisma .
+# Generate Prisma Client
+COPY prisma .
 RUN npx prisma generate
 
-ADD . .
+# Copy application code
+COPY . .
+
+# Build application
 RUN npm run build
 
-# Finally, build the production image with minimal footprint
+
+# Final stage for app image
 FROM base
 
-WORKDIR /myapp
+# Install packages needed for deployment
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y openssl && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-COPY --from=production-deps /myapp/node_modules /myapp/node_modules
-COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
+# Copy built application
+COPY --from=build /app /app
 
-COPY --from=build /myapp/build /myapp/build
-COPY --from=build /myapp/public /myapp/public
-ADD . .
-
-CMD ["npm", "start"]
+# Start the server by default, this can be overwritten at runtime
+EXPOSE 3000
+CMD [ "npm", "run", "start" ]

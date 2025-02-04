@@ -13,6 +13,7 @@ import { getCookie, sessionStorage } from "~/.server/session";
 import {
   FieldError,
   FormErrors,
+  H2,
   Label,
   SubmitButton,
   TextInput,
@@ -93,10 +94,8 @@ export default function AdminLoginRoute() {
   });
 
   return (
-    <div className="mx-auto max-w-md">
-      <h2 className="text-2xl font-semibold text-color lg:text-4xl">
-        Log in to your account
-      </h2>
+    <div className="mx-auto mt-24 max-w-lg">
+      <H2>Log in to your account</H2>
       <Form
         method="POST"
         {...getFormProps(form)}

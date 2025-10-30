@@ -41,7 +41,7 @@ import Label from "./Label";
 import Logo from "./Logo";
 import Options from "./Options";
 import PendingIndicator from "./PendingIndicator";
-import RssFeed from "./RssFeed";
+import RssFeed from "./RSSFeed";
 import Select from "./Select";
 import Socials from "./Socials";
 import SubmitButton from "./SubmitButton";

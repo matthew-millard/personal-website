@@ -1,3 +1,3 @@
-import RssFeed from "./RssFeed";
+import RssFeed from "./RSSFeed";
 
 export default RssFeed;

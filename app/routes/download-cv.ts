@@ -1,6 +1,6 @@
 export async function loader() {
   const cvUrl =
-    "https://res.cloudinary.com/hospohub/image/upload/v1738086008/Matt_Millard_Resume_yc6qbo.pdf";
+    "https://res.cloudinary.com/hospohub/image/upload/v1761833724/matthew_millard_resume_2025_wub2nh.pdf";
   const response = await fetch(cvUrl);
 
   if (!response.ok) {
